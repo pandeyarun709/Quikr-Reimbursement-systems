@@ -1,0 +1,13 @@
+.user-detail-wrap {
+    margin-top:5px;
+    margin-bottom:5px; 
+}
+
+.back-btn {
+    margin-top:0; 
+}
+
+.user-detail {
+    font-size:21px;
+    color: rgb(36, 60, 201);
+}
