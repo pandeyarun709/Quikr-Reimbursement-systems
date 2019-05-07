@@ -35,7 +35,9 @@
      <table class="table table-bordered" id="item_table">
       <tr>
         <th>Enter Expense Date</th>
-        <th>Travel Expense</th>
+        <th>Taxi/ Auto/Bus/ Rail Fare</th>
+        <th>Airfare</th>
+        <th>Petrol Reimbursement</th>
         <th>Telephone</th>
         <th>Hotel Stay</th>
         <th>Buisness Meal</th>
@@ -45,15 +47,15 @@
       </tr>
    <tr>
         <td><input type="date" name="date[]" class="form-control expense_date"  required/></td>
-        <td><input type="text" value="0" name="travel[]" class="form-control travel_exp" required/></td>
-        <td><input type="text" value="0" name="telephone[]" class="form-control telphone_exp" required/></td>
+        <td><input type="text" value="0" name="road[]" class="form-control via_road" required/></td>
+        <td><input type="text" value="0" name="air[]" class="form-control via_air" required/></td>
+        <td><input type="text" value="0" name="petrol[]" class="form-control petrol_exp" required/></td>
+        <td><input type="text" value="0" name="telephone[]" class="form-control petrol_exp" required/></td>
         <td><input type="text" value="0" name="hotel[]" class="form-control hotel_exp" required/></td>
         <td><input type="text" value="0" name="buisness[]" class="form-control meal_exp" required/></td>
         <td><input type="text" name="disc[]" class="form-control disc" required/></td>
         <td><input type="file" name="files[]" class="form-control files" accept=".png,.jpg"required/></td>
-
         <td><button type="button" name="add" class="btn btn-success btn-sm add"><span class="glyphicon glyphicon-plus"></span></button></td>
-
   </tr>
  </table>
 
@@ -77,7 +79,9 @@ $(document).ready(function(){
   var html = '';
   html += '<tr>';
   html += '<td><input type="date" name="date[]" class="form-control expense_date" required/></td>';
-  html += '<td><input type="text" value="0" name="travel[]" class="form-control travel_exp" required/></td>';
+  html += '<td><input type="text" value="0" name="road[]" class="form-control via_road" required/></td>';
+  html += '<td><input type="text" value="0" name="air[]" class="form-control via_air" required/></td>';
+  html += '<td><input type="text" value="0" name="petrol[]" class="form-control petrol_exp" required/></td>';
   html += '<td><input type="text" value="0" name="telephone[]" class="form-control telphone_exp" required/></td>';
   html += '<td><input type="text" value="0" name="hotel[]" class="form-control hotel_exp" required/></td>';
   html += '<td><input type="text" value="0" name="buisness[]" class="form-control meal_exp" required/></td>';

@@ -10,8 +10,7 @@ function dateDiffInDays(a, b) {
 
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
-
-
+// Date validation
 $("table").on("change" ,".expense_date" ,(e)=>{
         let str_date = e.target.value;
         let dte = new Date(str_date);
@@ -25,3 +24,4 @@ $("table").on("change" ,".expense_date" ,(e)=>{
             else alert("Please enter the valid date ");  
         }
 });
+
