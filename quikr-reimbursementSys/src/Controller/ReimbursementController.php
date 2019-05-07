@@ -165,6 +165,7 @@ class ReimbursementController extends DefaultController {
       
                 // Fetch body from Request
                 $raw = $request->request->all();
+                //var_dump($raw); die;
                 
                 // Checking Total
                 $t = $raw['travel'][0] + $raw['hotel'][0]+ $raw['buisness'][0]+$raw['telephone'][0];

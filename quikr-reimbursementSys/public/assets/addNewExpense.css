@@ -11,3 +11,17 @@
     font-size:21px;
     color: rgb(36, 60, 201);
 }
+
+.wrap-exp-form {
+    padding: 10px
+
+}
+
+th {
+    font-size: 15px;
+    width: 10%;
+}
+
+td {
+    width: 9%;
+}

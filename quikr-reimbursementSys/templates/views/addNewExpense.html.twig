@@ -13,10 +13,7 @@
  </head>
  <body>
  
-  
-
-
-  <div class="container jumbotron">
+  <div class=" wrap-exp-form jumbotron">
   <a style="color: white; font-size: 2em;" class="back-btn btn btn-sm btn-primary" href="/reimbursement"><i class="fas fa-arrow-left"></i></a>
   <h2 align="left">NON CTC-Expense Reimbursement</h2>
   <div class="user-detail-wrap">
@@ -28,39 +25,40 @@
   </div> 
   
    <h3 align="left">Add your Expense<span style="color: red;">( All field are mandatory*)</span></h3>
-   {# <br /> #}
+   
    <form method="POST" id="insert_form" enctype="multipart/form-data" encoding='multipart/form-data' action="/reimbursement/addexpense">
     <div class="table-repsonsive">
      <span id="error"></span>
-     <table class="table table-bordered" id="item_table">
+     <table class="table table-bordered" id="item_table" width="100%">
       <tr>
-        <th>Enter Expense Date</th>
+        <th width="10%">Start Date</th>
+        <th width="10%">End Date</th>
         <th>Taxi/ Auto/Bus/ Rail Fare</th>
         <th>Airfare</th>
         <th>Petrol Reimbursement</th>
         <th>Telephone</th>
         <th>Hotel Stay</th>
         <th>Buisness Meal</th>
+        <th>Miscellaneous</th>
         <th>Buisness Justification</th>
         <th>Upload Document</th>
         <th></th>
       </tr>
    <tr>
-        <td><input type="date" name="date[]" class="form-control expense_date"  required/></td>
-        <td><input type="text" value="0" name="road[]" class="form-control via_road" required/></td>
-        <td><input type="text" value="0" name="air[]" class="form-control via_air" required/></td>
-        <td><input type="text" value="0" name="petrol[]" class="form-control petrol_exp" required/></td>
-        <td><input type="text" value="0" name="telephone[]" class="form-control petrol_exp" required/></td>
-        <td><input type="text" value="0" name="hotel[]" class="form-control hotel_exp" required/></td>
-        <td><input type="text" value="0" name="buisness[]" class="form-control meal_exp" required/></td>
-        <td><input type="text" name="disc[]" class="form-control disc" required/></td>
-        <td><input type="file" name="files[]" class="form-control files" accept=".png,.jpg"required/></td>
-        <td><button type="button" name="add" class="btn btn-success btn-sm add"><span class="glyphicon glyphicon-plus"></span></button></td>
+        <td width="10%"><input width="20%" type="date" name="dateStart[]" class="form-control start_date" required/></td>
+        <td width="10%"><input width="20%" type="date" name="dateEnd[]" class="form-control end_date"  required/></td>
+        <td ><input type="text" value="0" name="road[]" class="form-control via_road" required/></td>
+        <td ><input type="text" value="0" name="air[]" class="form-control via_air" required/></td >
+        <td ><input type="text" value="0" name="petrol[]" class="form-control petrol_exp" required/></td >
+        <td ><input type="text" value="0" name="telephone[]" class="form-control petrol_exp" required/></td >
+        <td ><input type="text" value="0" name="hotel[]" class="form-control hotel_exp" required/></td >
+        <td ><input type="text" value="0" name="buisness[]" class="form-control meal_exp" required/></td >
+        <td ><input type="text" value="0" name="miscellaneous[]" class="form-control Miscellaneous" required/></td >
+        <td ><textarea type="text" name="disc[]" class="form-control disc" cols="100" rows ="2"  required></textarea></td >
+        <td ><input type="file" name="files[]" class="form-control files" accept=".png,.jpg"required/></td >
+        <td ><button type="button" name="add" class="btn btn-success btn-sm add"><span class="glyphicon glyphicon-plus"></span></button></td>
   </tr>
  </table>
-
-
-
 
      <div align="center">
       <input type="submit"  name="submit" class="btn btn-warning" value="Final Submit!!" />
@@ -68,6 +66,7 @@
     </div>
    </form>
   </div>
+
   <script src="/js/addNewExp.js"></script>
  </body>
 </html>
@@ -78,16 +77,17 @@ $(document).ready(function(){
  $(document).on('click', '.add', function(){
   var html = '';
   html += '<tr>';
-  html += '<td><input type="date" name="date[]" class="form-control expense_date" required/></td>';
+  html += '<td><input type="date" name="date[]" class="form-control start_date" required/></td>';
+   html += '<td><input type="date" name="date[]" class="form-control end_date" required/></td>';
   html += '<td><input type="text" value="0" name="road[]" class="form-control via_road" required/></td>';
   html += '<td><input type="text" value="0" name="air[]" class="form-control via_air" required/></td>';
   html += '<td><input type="text" value="0" name="petrol[]" class="form-control petrol_exp" required/></td>';
   html += '<td><input type="text" value="0" name="telephone[]" class="form-control telphone_exp" required/></td>';
   html += '<td><input type="text" value="0" name="hotel[]" class="form-control hotel_exp" required/></td>';
   html += '<td><input type="text" value="0" name="buisness[]" class="form-control meal_exp" required/></td>';
+  html += '<td><input type="text" value="0" name="miscellaneous[]" class="form-control Miscellaneous" required/></td>';
   html += '<td><input type="text" name="disc[]" class="form-control disc" required/></td>';
   html += '<td><input type="file" name="files[]" class="form-control files" required/></td>';
-
   html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
      
      

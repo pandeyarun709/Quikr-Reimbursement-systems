@@ -11,17 +11,30 @@ function dateDiffInDays(a, b) {
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
 // Date validation
-$("table").on("change" ,".expense_date" ,(e)=>{
+$("table").on("change" ,".start_date" ,(e)=>{
         let str_date = e.target.value;
         let dte = new Date(str_date);
         let tday = new Date();
         let diff = dateDiffInDays(dte, tday);
         console.log(dte.getDate() , tday.getMonth());
         console.log("diff date " , diff);
-        if(diff < 0 || diff > 60) {
+        if(diff > 60) {
             if(diff > 60)
               alert("Please enter the valid date ,you can only enter 60 days old expense");
             else alert("Please enter the valid date ");  
         }
+});
+
+// Date validation
+$("table").on("change" ,".end_date" ,(e)=>{
+    let str_date = e.target.value;
+    let dte = new Date(str_date);
+    let tday = new Date();
+    let diff = dateDiffInDays(dte, tday);
+    console.log(dte.getDate() , tday.getMonth());
+    console.log("diff date " , diff);
+    if(diff < 0 ) {
+        alert("Please enter the valid date ");  
+    }
 });
 
