@@ -63,24 +63,30 @@
                     <th width="15%">Total Exp</th>
                     <th width="15%">Approved Date</th>
                     <th width="15%">Action</th>
+                    <th>Comments</th>
                     <th width="15%">Details</th>
                 </tr>
               </thead>
               <tbody>
-                        {% for k1,v1 in v %}
-
-                    <tr>
+               {% for k1,v1 in v %}
+                <tr>
                     <td width="15%"> {{ v1.empname }}</td>
-                    <td width="15%"> {{ k }}</td>
-                        <td width="10%"> {{ v1.formid }}  </td>
-                        <td width="15%"> {{ v1.total_exp }} </td>
-                        <td width="15%"> {{ v1.approved_date|date("Y/m/d") }} </td>
-                      <td width="15%">  
-                        <a id="pay" name="status" class="btn btn-xs btn-warning" href="/finance/payment/{{ v1.formid }}"> PAY</a>
-                        </td>
-                        <td width="15%"> <a id="view" name="details" href="/finance/view/{{ v1.formid }}" class="btn btn-xs btn-info"> VIEW</a></td>
+                    <td width="10%"> {{ k }}</td>
+                    <td width="10%"> {{ v1.formid }}  </td>
+                    <td width="10%"> {{ v1.total_exp }} </td>
+                    <td width="10%"> {{ v1.approved_date|date("Y/m/d") }} </td>
+                    <td width="10%">  
+                        <a id="pay" name="status" class="btn btn-sm btn-warning" href="/finance/payment/{{ v1.formid }}"> Approve</a>
+                    </td>
+                    <td width="25%">
+                      <form method="POST" action="/finance/payment/{{ v1.formid }}">
+                         <textarea type="text" name="disc[]" class="form-control disc" cols="100" rows ="2"  required></textarea>
+                         <input style="width:100%;" type="submit" id="pay" name="status" class="btn btn-sm btn-danger" value="Reject" />
+                      </form>
+                    </td>
+                    <td width="10%"> <a id="view" name="details" href="/finance/view/{{ v1.formid }}" class="btn btn-xs btn-info"> VIEW</a></td>
                         <!-- Approve or Reject -->
-                    </tr>
+                </tr>
             {% endfor %}
            {% endfor %}
         </tbody>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/tests" isTestSource="true" packagePrefix="App\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/src" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/doctrine/annotations" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/doctrine/collections" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/doctrine/persistence" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/doctrine/reflection" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/psr/simple-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/sensio/framework-extra-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/config" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/debug" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/dependency-injection" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/dotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/flex" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/framework-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/http-foundation" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/http-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/maker-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/routing" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/twig-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/twig-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/var-exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/web-server-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/quikr-reimbursementSys/vendor/twig/twig" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

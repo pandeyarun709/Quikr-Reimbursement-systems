@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use App\Manager\ReimbursementManager;
    
 
 class ReimbursementController extends DefaultController {
@@ -22,6 +24,7 @@ class ReimbursementController extends DefaultController {
         if( !$this->checkAuth()) {
            return $this->redirectToRoute('new_log');
          }
+         
          if($this->session->get('user') == null){
             return $this->redirectToRoute('new_log');
          }
@@ -165,7 +168,9 @@ class ReimbursementController extends DefaultController {
       
                 // Fetch body from Request
                 $raw = $request->request->all();
-                //var_dump($raw); die;
+                //ReimbursementManager  manager = new ReimbursementManager();
+              
+               
                 
                 // Checking Total
                 $t = $raw['travel'][0] + $raw['hotel'][0]+ $raw['buisness'][0]+$raw['telephone'][0];
