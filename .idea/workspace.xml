@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30e4289b-5c95-4207-8647-a462592436f7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/BaseRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/Tasks.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quikr-reimbursementSys/src/Controller/ReimbursementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/quikr-reimbursementSys/src/Controller/ReimbursementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quikr-reimbursementSys/src/Manager/ReimbursementManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/quikr-reimbursementSys/src/Manager/ReimbursementManager.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quikr-reimbursementSys/templates/views/addNewExpense.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/quikr-reimbursementSys/templates/views/addNewExpense.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quikr-reimbursementSys/templates/views/financeView.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/quikr-reimbursementSys/templates/views/financeView.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quikr-reimbursementSys/templates/views/reimbursement.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/quikr-reimbursementSys/templates/views/reimbursement.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,29 +22,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/templates/views/detailview.html.twig">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/templates/views/addNewExpense.html.twig">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Manager/ReimbursementManager.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-931">
-              <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Controller/ReimbursementController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="170" column="18" selection-start-line="170" selection-start-column="18" selection-end-line="170" selection-end-column="18" />
+            <state relative-caret-position="-74">
+              <caret line="174" column="48" selection-start-line="174" selection-start-column="48" selection-end-line="174" selection-end-column="48" />
               <folding>
                 <element signature="e#39#84#0#PHP" expanded="true" />
               </folding>
@@ -48,7 +33,51 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Manager/ReimbursementManager.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+              <folding>
+                <element signature="e#32#67#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/AddExpenseRequest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="499">
+              <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/Tasks.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3855">
+              <caret line="257" selection-start-line="257" selection-end-line="257" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/BaseRequest.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>ReimbursementManager</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,8 +85,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/quikr-reimbursementSys/src/Manager/ReimbursementManager.php" />
+        <option value="$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/Tasks.php" />
+        <option value="$PROJECT_DIR$/quikr-reimbursementSys/templates/views/addNewExpense.html.twig" />
+        <option value="$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/BaseRequest.php" />
         <option value="$PROJECT_DIR$/quikr-reimbursementSys/src/Controller/ReimbursementController.php" />
+        <option value="$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/AddExpenseRequest.php" />
+        <option value="$PROJECT_DIR$/quikr-reimbursementSys/src/Manager/ReimbursementManager.php" />
       </list>
     </option>
   </component>
@@ -109,20 +142,10 @@
       <path value="$PROJECT_DIR$/quikr-reimbursementSys/vendor/symfony/flex" />
     </include_path>
   </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/QuikrCurrentChanges.iml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/php.xml" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="x" value="1280" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -158,6 +181,20 @@
               <item name="QuikrCurrentChanges" type="b2602c69:ProjectViewProjectNode" />
               <item name="QuikrCurrentChanges" type="462c0819:PsiDirectoryNode" />
               <item name="quikr-reimbursementSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Manager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuikrCurrentChanges" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuikrCurrentChanges" type="462c0819:PsiDirectoryNode" />
+              <item name="quikr-reimbursementSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Requests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QuikrCurrentChanges" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuikrCurrentChanges" type="462c0819:PsiDirectoryNode" />
+              <item name="quikr-reimbursementSys" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -167,6 +204,12 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="QuikrCurrentChanges" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QuikrCurrentChanges" type="462c0819:PsiDirectoryNode" />
+              <item name="quikr-reimbursementSys" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -175,6 +218,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -208,17 +252,18 @@
       <updated>1557222018921</updated>
       <workItem from="1557222021032" duration="387000" />
       <workItem from="1557236428224" duration="332000" />
+      <workItem from="1557303437696" duration="6973000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="719000" />
+    <option name="totallyTimeSpent" value="7692000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="1280" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2536349" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16986156" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -231,7 +276,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32970297" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -251,22 +296,60 @@
     <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/templates/views/detailview.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/templates/views/addNewExpense.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Manager/ReimbursementManager.php">
+    <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/Tasks.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-931">
-          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        <state relative-caret-position="3855">
+          <caret line="257" selection-start-line="257" selection-end-line="257" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Controller/MySsoLogin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
+          <folding>
+            <element signature="e#43#88#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/templates/views/addNewExpense.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="80" column="48" selection-start-line="80" selection-start-column="48" selection-end-line="80" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/BaseRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Controller/ReimbursementController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="170" column="18" selection-start-line="170" selection-start-column="18" selection-end-line="170" selection-end-column="18" />
+        <state relative-caret-position="-74">
+          <caret line="174" column="48" selection-start-line="174" selection-start-column="48" selection-end-line="174" selection-end-column="48" />
           <folding>
             <element signature="e#39#84#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Requests/AddExpenseRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/quikr-reimbursementSys/src/Manager/ReimbursementManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+          <folding>
+            <element signature="e#32#67#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

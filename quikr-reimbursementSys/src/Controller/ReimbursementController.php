@@ -168,9 +168,12 @@ class ReimbursementController extends DefaultController {
       
                 // Fetch body from Request
                 $raw = $request->request->all();
-                //ReimbursementManager  manager = new ReimbursementManager();
-              
-               
+                $user = $this->session->get('user')->getAllProperties();
+                $manager = new ReimbursementManager();
+                $request = $manager->prepareAddExpenseRequest($raw, $user);
+
+                echo json_encode($request); die;
+
                 
                 // Checking Total
                 $t = $raw['travel'][0] + $raw['hotel'][0]+ $raw['buisness'][0]+$raw['telephone'][0];
@@ -218,34 +221,7 @@ class ReimbursementController extends DefaultController {
                   $x++;
                 }
         
-                
-                $totalExp =0;
-                $size = sizeof($raw['date']);
-                for($i = 0 ; $i < $size ; $i++){
-                $total = $raw["travel"][$i] + $raw['hotel'][$i]+ $raw['buisness'][$i]+$raw['telephone'][$i];
-                $d =  array(
-                    "expense_date"  => $raw['date'][$i],
-                    "travel_exp"    => $raw['travel'][$i],
-                    "telephone_exp" => $raw['telephone'][$i],
-                    "hotel_stay"    => $raw['hotel'][$i],
-                    "business_meal" => $raw['buisness'][$i],
-                    "description"   => $raw['disc'][$i],
-                    "image_url"      => $imgarr[$i],
 
-                    "total_exp"     => $total
-                  );
-                    $totalExp = $totalExp + $total;
-                    $data[$i] = $d;
-                }
-               // var_dump($user);die;
-              
-                $final = array( 
-                  "empid"      => $user['empid'],
-                  "empname"    => $user['name'],
-                  "managerid"  => $user['managerId'],
-                  "tasks"      => $data,
-                  "total_exp"  => $totalExp
-              );
                 
               $get_data =  $this->curlApi->callAPI('POST', 'localhost:8080/Forms/AddForm' , json_encode($final));
 

@@ -77,8 +77,8 @@ $(document).ready(function(){
  $(document).on('click', '.add', function(){
   var html = '';
   html += '<tr>';
-  html += '<td><input type="date" name="date[]" class="form-control start_date" required/></td>';
-   html += '<td><input type="date" name="date[]" class="form-control end_date" required/></td>';
+  html += '<td><input type="date" name="dateStart[]" class="form-control start_date" required/></td>';
+   html += '<td><input type="date" name="dateEnd[]" class="form-control end_date" required/></td>';
   html += '<td><input type="text" value="0" name="road[]" class="form-control via_road" required/></td>';
   html += '<td><input type="text" value="0" name="air[]" class="form-control via_air" required/></td>';
   html += '<td><input type="text" value="0" name="petrol[]" class="form-control petrol_exp" required/></td>';
