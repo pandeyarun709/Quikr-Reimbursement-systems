@@ -5,9 +5,9 @@ namespace App\Manager;
 
 use App\Requests\AddExpenseRequest;
 use App\Requests\Tasks;
+use Symfony\Component\HttpKernel\Log\Logger;
 
-class ReimbursementManager
-{
+class ReimbursementManager extends  CurlApiRequest {
     /**
      * @param $raw
      * @param $user
@@ -16,13 +16,13 @@ class ReimbursementManager
     public static function prepareAddExpenseRequest($raw , $user) {
         $req = array();
         try {
-
-            $req = self::setRequest($raw , $user);
+            $postParam = self::setRequest($raw , $user);
+            $response = self::callAPI("POST" ,"http://192.168.90.182:8080/Forms/AddForm",json_encode($postParam));
 
         } catch(\Exception $e) {
-           echo "<h2> ERROR!! -- (Reim manger)</h2>".$e;
+           echo "<h2> ERROR!! -- (Reim manger)</h2>".$e->getMessage();
         }
-        return $req->getAllProperties();
+        return $req;
 
     }
 
@@ -34,40 +34,62 @@ class ReimbursementManager
      */
     private function setRequest($raw , $user) {
         $req = new AddExpenseRequest();
-
         $totalExp =0;
-        $size = sizeof($raw['dateStart']);
-        for($i = 0 ; $i < $size ; $i++){
-            $total = $raw['road'][$i] +$raw['air'][$i] + $raw['petrol'][$i]+ $raw['hotel'][$i]+ $raw['buisness'][$i]+$raw['telephone'][$i];
-            $task = new Tasks();
-            $task->setStartDate($raw['dateStart'][$i]);
-            $task->setEndDate($raw['dateEnd'][$i]);
-            $task->setRoadFare($raw['road'][$i]);
-            $task->setAirFare($raw['air'][$i]);
-            $task->setPetrol($raw['petrol'][$i]);
-            $task->setTelephoneExp($raw['telephone'][$i]);
-            $task->setHotelStay($raw['hotel'][$i]);
-            $task->setBusinessMeal($raw['buisness'][$i]);
-            $task->setMiscelleneous($raw['miscellaneous'][$i]);
-            $task->setDescription($raw['disc'][$i]);
-            $task->setTotalExp($total);
+              $task = new Tasks();
+              $size = sizeof($raw['expense']);
+              $task->setStartDate($raw['dateStart']);
+              $task->setEndDate($raw['dateEnd']);
+              $task->setDescription($raw["disc"]);
 
-            $req->setTasks($task->getAllProperties());
-            $totalExp = $totalExp + $total;
+              for ($i = 0; $i < $size; $i++) {
 
-        }
+                  switch ($raw["expense"][$i]) {
+                      case 'road' :
+                          $task->setRoadFare($raw['amount'][$i]);
+                          break;
 
-        $req->setEmpId($user["empid"]);
-        $req->setEmpName($user["name"]);
-        $req->setEmail($user["email"]);
-        $req->setDesignation($user["designation"]);
-        $req->setDepartment("Technolgy");//$user["department"]);
-        $req->setManagerId($user["managerId"]);
-        $req->setTotalExp($totalExp);
-        $req->setVertical("Goods");//$user["vertical"]);
+                      case 'air' :
+                          $task->setAirFare($raw['amount'][$i]);
+                          break;
 
-        return $req;
+                      case 'petrol' :
+                          $task->setPetrol($raw['amount'][$i]);
+                          break;
 
+                      case 'telephone' :
+                          $task->setTelephoneExp($raw['amount'][$i]);
+                          break;
+
+                      case 'hotel' :
+                          $task->setHotelStay($raw['amount'][$i]);
+                          break;
+
+                      case 'buisness' :
+                          $task->setBusinessMeal($raw['amount'][$i]);
+                          break;
+
+                      case 'miscellaneous' :
+                          $task->setMiscelleneous($raw['amount'][$i]);
+                          break;
+                  }
+
+                  $totalExp = $totalExp + $raw["amount"][$i];
+
+              }
+              $task->setImageUrls(array("img1" , "img2"));
+              $task->setTotalExp($totalExp);
+              $req->setTasks($task->getAllProperties());
+
+              $req->setEmpId($user["empid"]);
+              $req->setEmpName($user["name"]);
+              $req->setEmail($user["email"]);
+              $req->setDesignation($user["designation"]);
+              $req->setDepartment("Technolgy");//$user["department"]);
+              $req->setManagerId($user["managerId"]);
+              $req->setTotalExp($totalExp);
+              $req->setVertical("Goods");//$user["vertical"]);
+              $req->setManagerName("Arpan");
+        return $req->getAllProperties();
 
     }
 

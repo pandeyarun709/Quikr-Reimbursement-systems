@@ -40,6 +40,11 @@ class AddExpenseRequest extends  BaseRequest {
     protected $managerId;
 
     /**
+     * @var string
+     */
+    protected $managerName;
+
+    /**
      * @var double
      */
     protected $totalExp;
@@ -161,6 +166,22 @@ class AddExpenseRequest extends  BaseRequest {
     public function setManagerId(int $managerId): void
     {
         $this->managerId = $managerId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getManagerName(): string
+    {
+        return $this->managerName;
+    }
+
+    /**
+     * @param string $managerName
+     */
+    public function setManagerName(string $managerName): void
+    {
+        $this->managerName = $managerName;
     }
 
     /**

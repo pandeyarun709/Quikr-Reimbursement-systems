@@ -2,6 +2,7 @@
  namespace App\Controller;
    
   
+ use App\Manager\ManagerConManager;
  use Symfony\Component\HttpFoundation\Request;
  use Symfony\Component\HttpFoundation\Response;
  use Symfony\Component\Routing\Annotation\Route;
@@ -41,12 +42,80 @@
                 $urlString = 'localhost:8080/Forms/Manager';
                 $get_data = $this->curlApi->callAPI('GET', $urlString , json_encode($data));
                 $response = json_decode($get_data, true);
+
+                //==========================================================================================
+
+
+
+$json_data =  '[
+   {
+       "empId": 1,
+       "empName": "john",
+       "forms": [
+           {
+               "formid": 48,
+               "publishedDate": "2019-05-08T18:30:00.000+0000",
+               "createdDate": "2019-05-08T18:30:00.000+0000",
+               "status": "approved",
+               "published": true,
+               "tasks": [
+                   {
+                       "airFare": 500.25,
+                       "roadFare": 0,
+                       "petrol": 0,
+                       "telephoneExp": 0,
+                       "hotelStay": 0,
+                       "businessMeal": 0,
+                       "miscellaneous": 0,
+                       "totalExp": 550.25,
+                       "description": null,
+                       "startDate": "2019-04-03T18:30:00.000+0000",
+                       "endDate": "2019-04-03T18:30:00.000+0000",
+                       "imageUrls": [
+                           "imageurl1",
+                           "imageurl2"
+                       ]
+                   },
+                   {
+                       "airFare": 500.25,
+                       "roadFare": 0,
+                       "petrol": 0,
+                       "telephoneExp": 0,
+                       "hotelStay": 0,
+                       "businessMeal": 0,
+                       "miscellaneous": 0,
+                       "totalExp": 550.25,
+                       "description": null,
+                       "startDate": "2019-04-03T18:30:00.000+0000",
+                       "endDate": "2019-04-03T18:30:00.000+0000",
+                       "imageUrls": [
+                           "imageurl1",
+                           "imageurl2"
+                       ]
+                   }
+               ]
+           }
+       ]
+   }
+]';
+
+ //var_dump(json_decode($json_data)); die;
+
+//================================================================================================================================
+
+
+
+
+
+
+
              
                 
               return $this->render("/views/managerViewNew.html.twig",array(
                 //"result" => $response,
                  "result" => $response,
-                 "emp"   => $user
+                 "emp"   => $user,
+                  "x"  => json_decode($json_data)
               ));
            } catch(\Exception $e) {
               echo "<h2>Sorry for the inconvenience!!(Manager view)</h2>";
@@ -57,23 +126,23 @@
         }
 
         /**
-         * @Route("/manager/approve/{tid}" ,name="approved")
-         * @Method({"GET"})
+         * @Route("/manager/action/{formId}" ,name="approved")
+         * @Method({"POST"})
          */
-        public function approvedStatus($tid)
+        public function managerAction($formId ,Request $request)
         {
           try {
               // Check Authenticatio
               if( !$this->checkAuth()) {
                 return $this->redirectToRoute('new_log');
               }
+
+               $raw = $request->request->all();
               
                 $user = $this->session->get('user')->getAllProperties();
-                  $data = array(
-                      "managerid"=> $user['empid'],
-                      "formid" => $tid,
-                      "status"=>"approved"
-                );
+                $manager = new ManagerConManager();
+
+              //  $data = $manager->prepareActionRequest($user , $formId ,$raw);
 
                 $url='localhost:8080/Forms/Manager/UpdateForm';
                 $get_req = $this->curlApi->callAPI('PUT',$url,json_encode($data));
@@ -90,32 +159,32 @@
          * @Route("/manager/{tid}/reject" ,name="reject")
          * @Method({"GET"})
          */
-        public function rejected($tid)
-        {
-          
-
-         try {
-                // Check Authenticatio
-                if( !$this->checkAuth()) {
-                  return $this->redirectToRoute('new_log');
-                }
-                      
-                  $user = $this->session->get('user')->getAllProperties(); 
-                      $data = array(
-                      "managerid"=>$user['empid'],
-                      "formid" =>$tid,
-                    "status"=>"rejected"
-                  );
-
-                  $url='localhost:8080/Forms/Manager/UpdateForm';
-                  $get_req = $this->curlApi->callAPI('PUT',$url,json_encode($data));
-                  return $this->redirectToRoute('manager_view');
-             } catch(\Exception $e) {
-                echo "<h2>Sorry for the inconvenience!!(Manager view)</h2>";
-                echo $e;
-                return new Response();
-              }
-        }
+//        public function rejected($tid)
+//        {
+//
+//
+//         try {
+//                // Check Authenticatio
+//                if( !$this->checkAuth()) {
+//                  return $this->redirectToRoute('new_log');
+//                }
+//
+//                  $user = $this->session->get('user')->getAllProperties();
+//                      $data = array(
+//                      "managerid"=>$user['empid'],
+//                      "formid" =>$tid,
+//                    "status"=>"rejected"
+//                  );
+//
+//                  $url='localhost:8080/Forms/Manager/UpdateForm';
+//                  $get_req = $this->curlApi->callAPI('PUT',$url,json_encode($data));
+//                  return $this->redirectToRoute('manager_view');
+//             } catch(\Exception $e) {
+//                echo "<h2>Sorry for the inconvenience!!(Manager view)</h2>";
+//                echo $e;
+//                return new Response();
+//              }
+//        }
 
 
         /**

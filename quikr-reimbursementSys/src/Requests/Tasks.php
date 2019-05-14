@@ -7,42 +7,42 @@ class Tasks extends BaseRequest {
     /**
      * @var double
      */
-    protected $airFare;
+    protected $airFare = 0;
 
     /**
      * @var double
      */
-    protected $roadFare;
+    protected $roadFare = 0;
 
     /**
      * @var double
      */
-    protected $petrol;
+    protected $petrol = 0;
 
     /**
      * @var double
      */
-    protected $telephoneExp;
+    protected $telephoneExp = 0;
 
     /**
      * @var double
      */
-    protected $hotelStay;
+    protected $hotelStay = 0;
 
     /**
      * @var double
      */
-    protected $businessMeal;
+    protected $businessMeal = 0;
 
     /**
      * @var double
      */
-    protected $miscelleneous;
+    protected $miscelleneous = 0;
 
     /**
      * @var double
      */
-    protected $totalExp;
+    protected $totalExp = 0;
 
     /**
      * @var string
@@ -55,14 +55,14 @@ class Tasks extends BaseRequest {
     protected $startDate;
 
     /**
-     * @var string
-     */
-    protected $endDate;
-
-    /**
      * @var array
      */
     protected $imageUrls =array();
+
+    /**
+     * @var string
+     */
+    protected $endDate;
 
     /**
      * @return float
@@ -255,7 +255,6 @@ class Tasks extends BaseRequest {
     {
         $this->imageUrls = $imageUrls;
     }
-
 
 }
 

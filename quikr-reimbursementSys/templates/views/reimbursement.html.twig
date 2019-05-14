@@ -60,45 +60,19 @@ Outer for loop
 {% if result %}
 {% set i = 0 %}
 {% for data in result %}
-
-{# <div class="panel-group" id="accordion{{i}}">
-  <div class="panel panel-default">
-    <div  class="panel-heading clearfix"  >
-     <div style="display:flex">
-       <div>
-        <h4 class="panel-title pull-left">
-          <a data-toggle="collapse" data-parent="#accordion{{i}}" href="#collapse{{i}}" class="btn btn-sm btn-success">
-        Form ID {{ key[i] }}</a> <br>
-        
-        </h4>
-      </div>
-       <div>
-           {% if status[key[i]] == "pending" %}
-              <p style="color: #15151c;"> <i class="fas fa-clock"></i></p>
-          {% elseif status[key[i]] == "rejected" %}
-                 <p style="color: red;"> <i class="fas fa-times-circle"></i></p>
-
-           {% else %}
-               <p style="color : green"> <i class="fas fa-check-circle"></i> </p>      
-           {% endif %}
-       </div>
-     </div>
-    </div> 
-
-    <div id="collapse{{i}}" class="panel-collapse collapse in"> #}
-      <div style="border: 2px solid black ; margin-top: 10px; padding: 5px;">
+    <div style="border: 2px solid black ; margin-top: 10px; padding: 5px;">
       <div style="display:flex">
-          <h4> Form ID {{key[i]}}</h4>
-          <div>
-            {% if status[key[i]] == "pending" %}
-                <p style="color: #15151c;"> <i class="fas fa-clock"></i></p>
-            {% elseif status[key[i]] == "rejected" %}
-                  <p style="color: red;"> <i class="fas fa-times-circle"></i></p>
+          <h4> Form ID {{data.empId}}</h4>
+{#          <div>#}
+{#            {% if status[key[i]] == "pending" %}#}
+{#                <p style="color: #15151c;"> <i class="fas fa-clock"></i></p>#}
+{#            {% elseif status[key[i]] == "rejected" %}#}
+{#                  <p style="color: red;"> <i class="fas fa-times-circle"></i></p>#}
 
-            {% else %}
-                <p style="color : green"> <i class="fas fa-check-circle"></i> </p>      
-            {% endif %}
-          </div>
+{#            {% else %}#}
+{#                <p style="color : green"> <i class="fas fa-check-circle"></i> </p>      #}
+{#            {% endif %}#}
+{#          </div>#}
         </div>
         <table cellpadding="0" cellspacing="0" border="0" class="table display" id="example" width="100%">
           <thead>
@@ -111,34 +85,35 @@ Outer for loop
                 <th>Telephone Expense</th>
                 <th>Bussiness Meal</th>
                 <th>Hotel Stay</th>
+                <th>Miscellaneous</th>
                 <th>Description</th>
                 <th>Total</th>
              </tr>
           </thead>
            <tbody>
-           {% for d in data %}
-             {% for res in d %}
+             {% for res in data.tasks %}
                <tr>
-                    <td> {{ res.travel_exp }} </td>
-                    <td> {{ res.telephone_exp }} </td>
-                    <td> {{ res.business_meal}} </td>
-                    <td> {{ res.hotel_stay }}</td>
-                    <td> {{ res.description }}</td>
-                    <td> {{ res.expense_date|date("Y/m/d") }} </td>
-                    <td> {{ res.total_exp }} </td>
-                </tr> 
-            {% endfor %}
-           {% endfor %} 
+                   <td> {{ res.startDate|date("Y/m/d") }} </td>
+                   <td> {{ res.endDate|date("Y/m/d") }} </td>
+                    <td> {{ res.airFare }} </td>
+                    <td> {{ res.roadFare }} </td>
+                    <td> {{ res.petrol}} </td>
+                    <td> {{ res.telephoneExp}}</td>
+                    <td> {{ res.businessMeal }}</td>
+                    <td> {{ res.hotelStay }}</td>
+                    <td> {{ res.miscelleneous }}</td>
+                    <td> {{ res.totalExp }} </td>
+               </tr>
+           {% endfor %}
        </tbody>
       </table>
     </div>
+{%  endfor %}
     {# </div>
   </div>
 
  </div>  #}
 <!--- End -->
- {% set i = i +1 %}
-{% endfor %}
 {% else %}
 <h3>NO DATA</h3>
 {% endif %}

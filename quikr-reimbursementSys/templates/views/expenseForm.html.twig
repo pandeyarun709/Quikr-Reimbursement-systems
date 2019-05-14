@@ -1,0 +1,109 @@
+<html>
+<head>
+    <title> Expenses</title>
+    <link rel="icon" href="http://blog.quikr.com/wp-content/uploads/2015/09/Favicon.ico" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/addNewExpense.css" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+<div class="wrap-exp-form jumbotron">
+    <a style="color: white; font-size: 2em;" class="back-btn btn btn-sm btn-primary" href="/reimbursement"><i class="fas fa-arrow-left"></i></a>
+    <h2 align="left">NON CTC-Expense Reimbursement</h2>
+    <!-- User Details -->
+    <div class="user-detail-wrap">
+        <p><strong> Emp Id :</strong> <span class="user-detail">{{emp.empid}}</span></p>
+        <p><strong> Name :</strong> <span class="user-detail">{{emp.name}}</span></p>
+        <p> <strong>Designation :</strong> <span class="user-detail">{{emp.designation}}</span></p>
+        <p> <strong>Vertical :</strong> <span class="user-detail">{{emp.name}}</span></p>
+        <p> <strong>Email :</strong> <span class="user-detail">{{emp.email}}</span></p>
+    </div>
+
+    <h3 align="left">Add your Expense<span style="color: red;">( All field are mandatory*)</span></h3>
+
+    <form method="POST" id="insert_form" enctype="multipart/form-data" encoding='multipart/form-data' action="/reimbursement/addexpense">
+        <div class="table-repsonsive">
+            <span id="error"></span>
+
+           <div style="margin-bottom: 10px; width: 200px;" >
+               <strong>Start Date : </strong><input width="10px" type="date" name="dateStart" class="form-control start_date" required/>
+               <strong>End Date : </strong><input  type="date" name="dateEnd" class="form-control end_date"  required/>
+           </div>
+
+            <table class="table table-bordered" id="item_table" width="100%">
+                <tr>
+                    <th>Expense Type</th>
+                    <th>Amount</th>
+                    <th>Documents</th>
+                    <th width="10%">Action</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="culscore" name="expense[]" class="form-control">
+                            <option value="" selected disabled>Expense Type</option>
+                            <option value="road">Taxi/ Auto/Bus/ Rail Fare</option>
+                            <option value="air">Airfare</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="telephone">Telephone</option>
+                            <option value="hotel">Hotel Stay</option>
+                            <option value="buisness">Miscellaneous</option>
+                        </select>
+                    </td>
+                    <td><input type="text" value="0" name="amount[]" class="form-control" required/></td>
+                    <td ><input type="file" name="files[]" class="form-control files" accept=".png,.jpg"required/></td >
+                    <td ><button type="button" name="add" class="btn btn-success btn-sm add"><span class="glyphicon glyphicon-plus"></span></button></td>
+                </tr>
+            </table>
+
+            <div align="center">
+                <div style="margin-bottom: 5px">
+                    <p style="font-weight:bold">Description</p>
+                    <textarea style="width: 60%; border-radius: 4px 4px 4px 4px " cols="10" rows="3" name="disc" required></textarea>
+                </div>
+                <input type="submit"  name="submit" class="btn btn-warning" value="Final Submit!!" />
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<script src="/js/addNewExp.js"></script>
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+
+        $(document).on('click', '.add', function(){
+            var html = '';
+            html += '<tr>';
+            html += '<td> <select id="culscore" name="expense[]" class="form-control" style="margin : 7px;">' +
+                '<option value="" selected disabled>Expense Type</option>' +
+                '<option value="road">Taxi/ Auto/Bus/ Rail Fare</option>' +
+                '<option value="air">Airfare</option>' +
+                '<option value="petrol">Petrol</option>' +
+                '<option value="telephone">Telephone</option>' +
+                '<option value="hotel">Hotel Stay</option>' +
+                '<option value="buisness">Miscellaneous</option>'+
+                '</select></td>';
+            html += '<td><input type="text" value="0" name="amount[]" class="form-control via_road" required/></td>';
+            html += '<td><input type="file" name="files[]" class="form-control files" required/></td>';
+            html += '<td><button type="button" name="remove" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-minus"></span></button></td></tr>';
+
+         $('#item_table').append(html);
+        });
+
+        $(document).on('click', '.remove', function(){
+            $(this).closest('tr').remove();
+        });
+
+
+
+    });
+</script>

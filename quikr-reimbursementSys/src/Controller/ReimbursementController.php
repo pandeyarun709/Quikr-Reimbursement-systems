@@ -30,56 +30,76 @@ class ReimbursementController extends DefaultController {
          }
        
 
-         $user = $this->session->get('user')->getAllProperties();
-          
-          $data = array(
-                  "id" => $user['empid'] ,
-                  "tofetch" => "all"
+        // $user = $this->session->get('user')->getAllProperties();
+        $data = '[{
+	"empId": 1,
+	"empName": "john",
+	"vertical": "goods",
+	"department": "technology",
+	"designation": "backend-developer",
+	"managerId": 101,
+	"totalExp": 1000.50,
+	"tasks": [{
+		"airFare": 500.25,
+		"roadFare": 0,
+		"petrol": 0,
+		"telephoneExp": 0,
+		"hotelStay": 0,
+		"businessMeal": 0,
+		"miscelleneous": 0,
+		"totalExp": 550.25,
+		"description": "travel to mumbai",
+		"startDate": "2019-04-04",
+		"endDate": "2019-04-04",
+		"imageUrls": [
+			"imageurl1", "imageurl2"
 
-              );
-           
-          $urlString = 'localhost:8080/Forms';
-          $get_data = $this->curlApi->callAPI('GET', $urlString , json_encode($data));
-          $response = json_decode($get_data, true);
-          
-          // Key 
-          $key =  array_keys($response);
+		]
+	}]
+}, {
+	"empId": 1,
+	"empName": "john",
+	"vertical": "goods",
+	"department": "technology",
+	"designation": "backend-developer",
+	"managerId": 101,
+	"totalExp": 1000.50,
+	"tasks": [{
+		"airFare": 500.25,
+		"roadFare": 0,
+		"petrol": 0,
+		"telephoneExp": 0,
+		"hotelStay": 0,
+		"businessMeal": 0,
+		"miscelleneous": 0,
+		"totalExp": 550.25,
+		"description": "travel to mumbai",
+		"startDate": "2019-04-04",
+		"endDate": "2019-04-04",
+		"imageUrls": [
+			"imageurl1", "imageurl2"
 
+		]
+	}]
+}
+]';
 
-          // Fetching task data  
-          $final=array();
-           $c = 0;
-            foreach($key as $k) {
-              foreach($response[$k] as $d ) {
-                  
-                $final[$k][] = $d['tasks'];
-               }
-              $c++;
-           }
- 
+//var_dump(json_decode($data)); die;
 
-
-              // Fetching status
-             $st = array();
-
-             foreach($key as $k) {
-              foreach($response[$k] as $d ) {
-                  $st[$k] = $d['status'];
-                     
-               }
-             }
-      
+        $final = null;
+        $key = null;
+        $st = "pending";
              $user = $this->session->get('user')->getAllProperties();
              //var_dump($user); die;
             return $this->render('views/reimbursement.html.twig', array(
               "status" => $st,
                "key"  =>  $key,
-                "result" => $final,
+                "result" => json_decode($data),
                 "emp"   =>  $user
             ));
       }catch(\Exception $e){
         echo "<h2>Sorry for the inconvenience!!(Reim view)</h2>";
-        echo $e;
+        echo $e->getMessage();
         return new Response();
       }
   }
@@ -122,7 +142,7 @@ class ReimbursementController extends DefaultController {
         }
 
         //========================
-        //  Tasks Add Form
+        //  Render Expense  Form
         //========================
         /**
          * @Route("/reimbursement/new" , name="new_reimbursement")
@@ -137,7 +157,7 @@ class ReimbursementController extends DefaultController {
                 }
 
                 $user = $this->session->get('user')->getAllProperties();
-                  return $this->render("/views/addNewExpense.html.twig",array(
+                  return $this->render("/views/expenseForm.html.twig",array(
                      "emp" => $user
                   ));
 
@@ -157,7 +177,7 @@ class ReimbursementController extends DefaultController {
          *  @Route("/reimbursement/addexpense" , name="add_reimbursement")
          *  @Method({"POST"})
          */
-    public function addNewReimbursementData(Request $request) {
+        public function addNewReimbursementData(Request $request) {
         
          try {
         
@@ -175,22 +195,20 @@ class ReimbursementController extends DefaultController {
                 echo json_encode($request); die;
 
                 
-                // Checking Total
-                $t = $raw['travel'][0] + $raw['hotel'][0]+ $raw['buisness'][0]+$raw['telephone'][0];
-                
-                // Checking is there any data enter or not
-                if(!isset($raw['disc'])  ||  $t == 0) {
-                  $this->addFlash(
-                    'ins' , 
-                    'No Expense is Inserted!'
-                  );
+//                 Checking Total
+//                $t = $raw['travel'][0] + $raw['hotel'][0]+ $raw['buisness'][0]+$raw['telephone'][0];
+//
+//                // Checking is there any data enter or not
+//                if(!isset($raw['disc'])  ||  $t == 0) {
+//                  $this->addFlash(
+//                    'ins' ,
+//                    'No Expense is Inserted!'
+//                  );
+//
+//                  return $this->redirectToRoute('reimbursemet_sys');
+//                }
 
-                  return $this->redirectToRoute('reimbursemet_sys');
-                }
 
-
-                //User data
-              $user = $this->session->get('user')->getAllProperties();
              //$u =$user["sfs"];
               $imgarr=[];
               
@@ -259,7 +277,5 @@ class ReimbursementController extends DefaultController {
     }
 
 }
-
-   
 
  ?>  
