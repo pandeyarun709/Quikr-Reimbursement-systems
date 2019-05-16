@@ -1,5 +1,15 @@
 console.log("Connected check");
 //  var date = document.querySelectorAll(".expense_date");
+var expenses = {
+    road : 0,
+    air : 0,
+    petrol : 0,
+    telephone : 0,
+    hotel : 0,
+    buisness : 0,
+    miscellaneous : 0
+};
+
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -42,3 +52,13 @@ $(".end_date").on("change" ,(e)=>{
     }
 });
 
+//validation for expense
+$("table").on("change" , ".expenses" , (e)=>{
+     let exp = e.target.value;
+
+     if(expenses[exp] !== 0) {
+         alert("You already field this expense type");
+         e.target.value = "";
+     } else expenses[exp] = 1;
+
+});

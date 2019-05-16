@@ -46,14 +46,14 @@
                 </tr>
                 <tr>
                     <td>
-                        <select id="culscore" name="expense[]" class="form-control">
+                        <select id="culscore" name="expense[]" class="form-control expenses">
                             <option value="" selected disabled>Expense Type</option>
                             <option value="road">Taxi/ Auto/Bus/ Rail Fare</option>
                             <option value="air">Airfare</option>
                             <option value="petrol">Petrol</option>
                             <option value="telephone">Telephone</option>
                             <option value="hotel">Hotel Stay</option>
-                            <option value="buisness">Miscellaneous</option>
+                            <option value="buisness">Buisness Meal</option>
                         </select>
                     </td>
                     <td><input type="text" value="0" name="amount[]" class="form-control" required/></td>
@@ -83,14 +83,15 @@
         $(document).on('click', '.add', function(){
             var html = '';
             html += '<tr>';
-            html += '<td> <select id="culscore" name="expense[]" class="form-control" style="margin : 7px;">' +
+            html += '<td> <select id="culscore" name="expense[]" class="form-control expenses" style="margin : 7px;">' +
                 '<option value="" selected disabled>Expense Type</option>' +
                 '<option value="road">Taxi/ Auto/Bus/ Rail Fare</option>' +
                 '<option value="air">Airfare</option>' +
                 '<option value="petrol">Petrol</option>' +
                 '<option value="telephone">Telephone</option>' +
                 '<option value="hotel">Hotel Stay</option>' +
-                '<option value="buisness">Miscellaneous</option>'+
+                '<option value="buisness">Buisness Meal</option>'+
+                '<option value="miscellaneous">Miscellaneous</option>'+
                 '</select></td>';
             html += '<td><input type="text" value="0" name="amount[]" class="form-control via_road" required/></td>';
             html += '<td><input type="file" name="files[]" class="form-control files" required/></td>';

@@ -34,3 +34,14 @@ i {
     margin-left: 44%;
     padding-top: 3%;
 }
+
+.comment {
+    border: 2px solid gray;
+    border-radius: 4px 4px 4px 4px ;
+    margin-right:4px;
+}
+
+.action-btn {
+    margin-right:4px;
+    margin-bottom: 3px;
+}

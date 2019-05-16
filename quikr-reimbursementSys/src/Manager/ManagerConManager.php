@@ -4,7 +4,9 @@ namespace  App\Manager;
 
 class ManagerConManager extends CurlApiRequest {
 
-    public function prepareActionRequest($raw , $formId) {
+    public function prepareActionRequest($user, $raw , $formId) {
+        echo "hello";
+        var_dump($raw); die;
 
     }
 

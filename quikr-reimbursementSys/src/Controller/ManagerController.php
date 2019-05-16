@@ -142,7 +142,7 @@ $json_data =  '[
                 $user = $this->session->get('user')->getAllProperties();
                 $manager = new ManagerConManager();
 
-              //  $data = $manager->prepareActionRequest($user , $formId ,$raw);
+               $data = $manager->prepareActionRequest($user ,$raw,$formId);
 
                 $url='localhost:8080/Forms/Manager/UpdateForm';
                 $get_req = $this->curlApi->callAPI('PUT',$url,json_encode($data));

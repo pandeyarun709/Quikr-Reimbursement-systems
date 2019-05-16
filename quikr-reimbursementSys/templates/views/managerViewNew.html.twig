@@ -70,6 +70,8 @@
         </form>
     </div>
 
+
+{# -----------------------  Employee Date --------------------------- #}
     {% for key, value in x %}
         <div style="border: 2px solid black ; margin-top: 10px; padding: 5px;">
             <h4 style="margin: 5px;"> EmpId  {{ value.empId }} </h4>
@@ -110,6 +112,11 @@
 
                         </tr>
                         </thead>
+                        <form class="form-inline" method="POST" action="/manager/action/{{ v.formid }}">
+                            <input type="text" name="comment" class="comment" placeholder="Add Comment" required>
+                            <button  class="action-btn btn btn-sm btn-warning" name="reject">Reject</button>
+                            <button  class="action-btn btn btn-sm btn-info" name="approve"> approve</button>
+                        </form>
                         <tbody>
                         {% for v1 in v.tasks %}
                             <tr>
@@ -154,15 +161,9 @@
             {% endfor %}
         </div>
     {% endfor %}
+ {% endblock %}
 
-    {% endblock %}
-
-
-
-
-
-
-    {% block javascripts %}
+{% block javascripts %}
         <footer class="page-footer font-small blue pt-4 mt-4">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -173,4 +174,4 @@
                 })
             </script>
         </footer>
- {% endblock %}
+{% endblock %}
