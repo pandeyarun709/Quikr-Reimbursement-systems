@@ -185,7 +185,7 @@ class ReimbursementController extends DefaultController {
                   if( !$this->checkAuth()) {
                     return $this->redirectToRoute('new_log');
                   }
-      
+
                 // Fetch body from Request
                 $raw = $request->request->all();
                 $user = $this->session->get('user')->getAllProperties();
@@ -195,53 +195,7 @@ class ReimbursementController extends DefaultController {
                 echo json_encode($request); die;
 
                 
-//                 Checking Total
-//                $t = $raw['travel'][0] + $raw['hotel'][0]+ $raw['buisness'][0]+$raw['telephone'][0];
-//
-//                // Checking is there any data enter or not
-//                if(!isset($raw['disc'])  ||  $t == 0) {
-//                  $this->addFlash(
-//                    'ins' ,
-//                    'No Expense is Inserted!'
-//                  );
-//
-//                  return $this->redirectToRoute('reimbursemet_sys');
-//                }
 
-
-             //$u =$user["sfs"];
-              $imgarr=[];
-              
-              $x=0;
-                $size = sizeof($raw['date']);
-
-                // File Uploading API
-                foreach($_FILES['files']['tmp_name'] as $key => $tmp_name){
-                  $file_tmp = $_FILES['files']['tmp_name'][$key];
-                  $file_size=$_FILES['files']['size'][$key];
-                  $file_name = $_FILES['files']['name'][$key];
-                  $file_type=$_FILES['files']['type'][$key];
-                
-                  $info = getimagesize($file_tmp);
-                  $f = fopen($file_tmp, "r");
-                  $string = base64_encode(fread($f, filesize($file_tmp)));
-                  $imagerawdata="data:" . $info["mime"] . ";base64," . $string;
-                  $ch = curl_init();
-                  curl_setopt($ch, CURLOPT_URL, "http://raven.kuikr.com/upload");
-                  curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('imagerawdata' => $imagerawdata)));
-                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                  $result=json_decode(curl_exec($ch),true);
-                  //$curlResponse = curl_getinfo($ch);
-                  //print_r($result['fileurl']);die;
-                  curl_close($ch);
-                  unset($ch);
-                  $imgarr[$x]=$result['fileurl'];
-                  $x++;
-                }
-        
-
-                
-              $get_data =  $this->curlApi->callAPI('POST', 'localhost:8080/Forms/AddForm' , json_encode($final));
 
               //==================================
               // Sending Notification to manager

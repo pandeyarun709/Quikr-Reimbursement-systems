@@ -5,7 +5,7 @@ namespace App\Manager;
 
 use App\Requests\AddExpenseRequest;
 use App\Requests\Tasks;
-use Symfony\Component\HttpKernel\Log\Logger;
+
 
 class ReimbursementManager extends  CurlApiRequest {
     /**
@@ -13,12 +13,12 @@ class ReimbursementManager extends  CurlApiRequest {
      * @param $user
      * @return array
      */
-    public static function prepareAddExpenseRequest($raw , $user) {
+    public  function prepareAddExpenseRequest($raw , $user) {
         $req = array();
         try {
             $postParam = self::setRequest($raw , $user);
-            $response = self::callAPI("POST" ,"http://192.168.90.182:8080/Forms/AddForm",json_encode($postParam));
-
+            echo  json_encode($postParam); die;
+            $response = self::callAPI("POST" ,"http://192.168.0.100:8080/Forms/AddForm",json_encode($postParam));
         } catch(\Exception $e) {
            echo "<h2> ERROR!! -- (Reim manger)</h2>".$e->getMessage();
         }
@@ -30,13 +30,16 @@ class ReimbursementManager extends  CurlApiRequest {
     /**
      * @param $raw
      * @param $user
-     * @return AddExpenseRequest
+     * @return array
      */
     private function setRequest($raw , $user) {
         $req = new AddExpenseRequest();
         $totalExp =0;
               $task = new Tasks();
               $size = sizeof($raw['expense']);
+              $img = self::getImagesUrl();
+
+              $imageData = [];
               $task->setStartDate($raw['dateStart']);
               $task->setEndDate($raw['dateEnd']);
               $task->setDescription($raw["disc"]);
@@ -46,52 +49,91 @@ class ReimbursementManager extends  CurlApiRequest {
                   switch ($raw["expense"][$i]) {
                       case 'road' :
                           $task->setRoadFare($raw['amount'][$i]);
+                          $imageData['roadFare'] = $img[$i];
                           break;
 
                       case 'air' :
                           $task->setAirFare($raw['amount'][$i]);
+                          $imageData['airFare']= $img[$i];
                           break;
 
                       case 'petrol' :
                           $task->setPetrol($raw['amount'][$i]);
+                          $imageData['petrol']=$img[$i];
                           break;
 
                       case 'telephone' :
                           $task->setTelephoneExp($raw['amount'][$i]);
+                          $imageData['telephoneExp']= $img[$i];
                           break;
 
                       case 'hotel' :
                           $task->setHotelStay($raw['amount'][$i]);
+                          $imageData['hotelStay']= $img[$i];
                           break;
 
                       case 'buisness' :
                           $task->setBusinessMeal($raw['amount'][$i]);
+                          $imageData['businessMeal']= $img[$i];
                           break;
 
                       case 'miscellaneous' :
                           $task->setMiscelleneous($raw['amount'][$i]);
+                          $imageData['miscelleneous']=  $img[$i];
                           break;
                   }
 
                   $totalExp = $totalExp + $raw["amount"][$i];
 
               }
-              $task->setImageUrls(array("img1" , "img2"));
+              $task->setImageUrls($imageData);
               $task->setTotalExp($totalExp);
               $req->setTasks($task->getAllProperties());
 
               $req->setEmpId($user["empid"]);
               $req->setEmpName($user["name"]);
-              $req->setEmail($user["email"]);
-              $req->setDesignation($user["designation"]);
-              $req->setDepartment("Technolgy");//$user["department"]);
-              $req->setManagerId($user["managerId"]);
+             // $req->setEmail($user["email"]);
+            //  $req->setDesignation($user["designation"]);
+             // $req->setDepartment("Technolgy");//$user["department"]);
+             // $req->setManagerId($user["managerId"]);
               $req->setTotalExp($totalExp);
-              $req->setVertical("Goods");//$user["vertical"]);
-              $req->setManagerName("Arpan");
-        return $req->getAllProperties();
+            //  $req->setVertical("Goods");//$user["vertical"]);
+              //$req->setManagerName("Arpan");
+        return $req->getAllPropertiesFilter();
 
     }
+
+
+
+    private function  getImagesUrl() {
+        $imgUrls=[];
+        $x=0;
+        foreach($_FILES['files']['tmp_name'] as $key => $tmp_name){
+            $file_tmp = $_FILES['files']['tmp_name'][$key];
+            $file_size=$_FILES['files']['size'][$key];
+            $file_name = $_FILES['files']['name'][$key];
+            $file_type=$_FILES['files']['type'][$key];
+
+            $info = getimagesize($file_tmp);
+            $f = fopen($file_tmp, "r");
+            $string = base64_encode(fread($f, filesize($file_tmp)));
+            $imagerawdata="data:" . $info["mime"] . ";base64," . $string;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "http://raven.kuikr.com/upload");
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('imagerawdata' => $imagerawdata)));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result=json_decode(curl_exec($ch),true);
+
+            curl_close($ch);
+            unset($ch);
+            $imgUrls[$x]=$result['fileurl'];
+            $x++;
+        }
+        return $imgUrls;
+
+    }
+
+
 
 }
 
