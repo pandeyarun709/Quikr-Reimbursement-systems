@@ -15,13 +15,13 @@
               <a class="nav-link" href="/reimbursement">Reimbursement<span class="sr-only">(current)</span></a>
             </li>
               {% if emp %}
-                  {% if emp.designation == "manager" %}
+                  {% if emp.designation != "manager" %}
                   <li class="nav-item">
                     <a class="nav-link" href="/manager" tabindex="-1" aria-disabled="true">Manager View</a>
                   </li>
                   
                 {% endif %}
-                  {% if emp.department == "Finance and Accounts" %}
+                  {% if emp.department != "Finance and Accounts" %}
                     <li class="nav-item">
                         <a class="nav-link" href="/finance" tabindex="-1" aria-disabled="true">Finance View</a>
                     </li>   

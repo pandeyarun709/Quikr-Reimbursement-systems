@@ -3,6 +3,85 @@
 namespace App\Requests;
 
 class Tasks extends BaseRequest {
+    /**
+     * @return float
+     */
+    public function getTotalExp(): float
+    {
+        return $this->totalExp;
+    }
+
+    /**
+     * @param float $totalExp
+     */
+    public function setTotalExp(float $totalExp): void
+    {
+        $this->totalExp = $totalExp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStartDate(): string
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param string $startDate
+     */
+    public function setStartDate(string $startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return array
+     */
+    public function getImageUrls(): array
+    {
+        return $this->imageUrls;
+    }
+
+    /**
+     * @param array $imageUrls
+     */
+    public function setImageUrls(array $imageUrls): void
+    {
+        $this->imageUrls = $imageUrls;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndDate(): string
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param string $endDate
+     */
+    public function setEndDate(string $endDate): void
+    {
+        $this->endDate = $endDate;
+    }
 
     /**
      * @var double
@@ -12,7 +91,12 @@ class Tasks extends BaseRequest {
     /**
      * @var double
      */
-    protected $roadFare = 0;
+    protected $localTravel = 0;
+
+    /**
+     * @var double
+     */
+    protected $outstationTravel = 0;
 
     /**
      * @var double
@@ -32,7 +116,12 @@ class Tasks extends BaseRequest {
     /**
      * @var double
      */
-    protected $businessMeal = 0;
+    protected $lunchSnacks = 0;
+
+    /**
+     * @var double
+     */
+    protected $teamOuting = 0;
 
     /**
      * @var double
@@ -83,17 +172,33 @@ class Tasks extends BaseRequest {
     /**
      * @return float
      */
-    public function getRoadFare(): float
+    public function getLocalTravel(): float
     {
-        return $this->roadFare;
+        return $this->localTravel;
     }
 
     /**
-     * @param float $roadFare
+     * @param float $localTravel
      */
-    public function setRoadFare(float $roadFare): void
+    public function setLocalTravel(float $localTravel): void
     {
-        $this->roadFare = $roadFare;
+        $this->localTravel = $localTravel;
+    }
+
+    /**
+     * @return float
+     */
+    public function getOutstationTravel(): float
+    {
+        return $this->outstationTravel;
+    }
+
+    /**
+     * @param float $outstationTravel
+     */
+    public function setOutstationTravel(float $outstationTravel): void
+    {
+        $this->outstationTravel = $outstationTravel;
     }
 
     /**
@@ -147,17 +252,33 @@ class Tasks extends BaseRequest {
     /**
      * @return float
      */
-    public function getBusinessMeal(): float
+    public function getLunchSnacks(): float
     {
-        return $this->businessMeal;
+        return $this->lunchSnacks;
     }
 
     /**
-     * @param float $businessMeal
+     * @param float $lunchSnacks
      */
-    public function setBusinessMeal(float $businessMeal): void
+    public function setLunchSnacks(float $lunchSnacks): void
     {
-        $this->businessMeal = $businessMeal;
+        $this->lunchSnacks = $lunchSnacks;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTeamOuting(): float
+    {
+        return $this->teamOuting;
+    }
+
+    /**
+     * @param float $teamOuting
+     */
+    public function setTeamOuting(float $teamOuting): void
+    {
+        $this->teamOuting = $teamOuting;
     }
 
     /**
@@ -176,88 +297,7 @@ class Tasks extends BaseRequest {
         $this->miscelleneous = $miscelleneous;
     }
 
-    /**
-     * @return float
-     */
-    public function getTotalExp(): float
-    {
-        return $this->totalExp;
-    }
-
-    /**
-     * @param float $totalExp
-     */
-    public function setTotalExp(float $totalExp): void
-    {
-        $this->totalExp = $totalExp;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStartDate(): string
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * @param string $startDate
-     */
-    public function setStartDate(string $startDate): void
-    {
-        $this->startDate = $startDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEndDate(): string
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * @param string $endDate
-     */
-    public function setEndDate(string $endDate): void
-    {
-        $this->endDate = $endDate;
-    }
-
-    /**
-     * @return array
-     */
-    public function getImageUrls(): array
-    {
-        return $this->imageUrls;
-    }
-
-    /**
-     * @param array $imageUrls
-     */
-    public function setImageUrls(array $imageUrls): void
-    {
-        $this->imageUrls = $imageUrls;
-    }
-
 }
-
 
 ?>
 

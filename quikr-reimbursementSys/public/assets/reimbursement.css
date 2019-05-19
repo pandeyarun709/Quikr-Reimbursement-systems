@@ -35,13 +35,23 @@ i {
     padding-top: 3%;
 }
 
+
+.form-status {
+    margin-left: 73%;
+    display: flex;
+}
+
 .comment {
     border: 2px solid gray;
-    border-radius: 4px 4px 4px 4px ;
-    margin-right:4px;
+    border-radius: 4px 4px 4px 4px;
+    margin-right: 4px;
+    width: 51%!important;
+    margin-bottom: 5px;
 }
 
 .action-btn {
-    margin-right:4px;
-    margin-bottom: 3px;
+    margin-right: 10px;
+    width: 89%;
+    margin-bottom: 10px;
 }
+

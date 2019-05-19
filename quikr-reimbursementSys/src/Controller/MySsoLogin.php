@@ -24,12 +24,9 @@
      *  @Method({"GET"})
      */
     public function index() {
-       
-    
         return $this->redirectToRoute('new_log');
     }
-    
-    
+
     /**
      * @Route("/newLogin" , name="new_log")
      * Method({"GET"})
@@ -95,7 +92,6 @@
                            $ssoToken, 
                            base64_decode($auth_key), 
                             array('HS256'));
-            
            // MAnager details
           // var_dump($user);die;
            $url ="https://hrms.quikrcorp.com/app/aboutEmpDetail?q=".$user->empId;
@@ -114,45 +110,33 @@
           // Checking manager or emp
           $url = "https://hrms.quikrcorp.com/app/aboutEmpTeam?q=".$user->empId;
           $get_data = $this->curlApi->callAPI('GET', $url ,false);
-           $response = json_decode($get_data, true);             
-             $s = sizeof($response['data']); 
-
+           $response = json_decode($get_data, true);
+             $s = sizeof($response['data']);
              if($s == 0)
              {
                 $designation = "employee";
              }else {
                 $designation = "manager";
              }
-            // var_dump($user); die;
 
-            // Hard coded data for testing----------
            if( $user->empId == 3758687 ) {
             $foption  = "Finance and Accounts";
             $designation = "manager";
          }
-         //var_dump($user); die;      
-           $u = new User(
-                        $user->id ,
-                        $user->empId, 
-                        $user->name,
-                        $user->email,
-                        "Bangalore",
-                        $designation,
-                        $mangerid ,
-                        $foption 
-                      );
- 
-              // var_dump($u); die;
-                  
+
+         //===========================================================
+         //  Get vertical
+         //============================================================
+           $userDetails = $this->getHRMSDeatails($user->empId);
+           $u = $this->setUserDetails($user , $userDetails->data);
+            //var_dump($u); die;
                  $this->session->set('user' , $u);
                  $this->session->set('islogin' , true);
  
                  $cookie_name = "id_token";
                  $cookie_value = $ssoToken;
-              setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); 
-                //var_dump($s); die;
+                 setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
                  return $this->redirectToRoute("reimbursemet_sys");
-              
            }
 
         /**
@@ -171,9 +155,6 @@
               $res = setcookie($cookie_name,'',time()-3600,"/");
             // var_dump($_COOKIE); die;
               //ob_flush();
-
-
-
               $encryptedClientId = $this->getEncryptedClientId();
               $headers = array(
                   'Authorization: Basic ' . $encryptedClientId
@@ -197,10 +178,6 @@
 
         }
 
-
-
-
-
         //========================
         // Functions
         //=====================
@@ -209,58 +186,58 @@
            // @ return SSo Token
            public function getSsoToken($auth_code) {
              
-             $client_id = "ReimbursementSystem";
-             $auth_key = "NqdH5Brq8D9zVSc7";
-             $auth_url = 'http://192.168.101.39:8081/api/key/aesenccode?auth_code='.$auth_code.'&auth_key='.$auth_key;
-             $curl = curl_init($auth_url);
-             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-             $result = json_decode(curl_exec($curl));
-             curl_close($curl);
- 
-             // Encrypt Auth Code 
-             $encyptedAuthCode = $result->auth_code;
- 
-             // Encrypt Client Id
-             $encryptedClientId = $this->getEncryptedClientId();
-             
-             $postFields = http_build_query(array(
-               'grantType' => 'authorization_code',
-               'code' => $encyptedAuthCode,
-               'clientId' => $client_id
-             ));
+                 $client_id = "ReimbursementSystem";
+                 $auth_key = "NqdH5Brq8D9zVSc7";
+                 $auth_url = 'http://192.168.101.39:8081/api/key/aesenccode?auth_code='.$auth_code.'&auth_key='.$auth_key;
+                 $curl = curl_init($auth_url);
+                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                 $result = json_decode(curl_exec($curl));
+                 curl_close($curl);
 
-             $headers = array(
-               'Content-Type: application/x-www-form-urlencoded',
-               'Authorization: Basic '.$encryptedClientId
-             );
-          
-             $ssoTokenUrl = "http://192.168.124.123:13000/identity/v1/token";
-             $ch = curl_init();
-             curl_setopt($ch, CURLOPT_URL, $ssoTokenUrl);
-             curl_setopt($ch, CURLOPT_POST, true);
-             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-             curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-             $result = curl_exec($ch);
-             $result = json_decode($result);
- 
-             // Checking data 
-             //var_dump($result); die;
- 
-             if (isset($result->IdentityTokenApplicationResponse->errors)) {
- 
-               if ($result->IdentityTokenApplicationResponse->errors[0]->code == 'UNAUTHORIZED') {
-                 echo 'UNAUTHORIZED';
-               } else {
-                 echo 'Something Went Wrong';
-               }
-               exit;
-             } else {
- 
-               return $result->IdentityTokenApplicationResponse->idToken;
- 
-             }
+                 // Encrypt Auth Code
+                 $encyptedAuthCode = $result->auth_code;
+
+                 // Encrypt Client Id
+                 $encryptedClientId = $this->getEncryptedClientId();
+
+                 $postFields = http_build_query(array(
+                   'grantType' => 'authorization_code',
+                   'code' => $encyptedAuthCode,
+                   'clientId' => $client_id
+                 ));
+
+                 $headers = array(
+                   'Content-Type: application/x-www-form-urlencoded',
+                   'Authorization: Basic '.$encryptedClientId
+                 );
+
+                 $ssoTokenUrl = "http://192.168.124.123:13000/identity/v1/token";
+                 $ch = curl_init();
+                 curl_setopt($ch, CURLOPT_URL, $ssoTokenUrl);
+                 curl_setopt($ch, CURLOPT_POST, true);
+                 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                 curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+                 $result = curl_exec($ch);
+                 $result = json_decode($result);
+
+                 // Checking data
+                 //var_dump($result); die;
+
+                 if (isset($result->IdentityTokenApplicationResponse->errors)) {
+
+                   if ($result->IdentityTokenApplicationResponse->errors[0]->code == 'UNAUTHORIZED') {
+                     echo 'UNAUTHORIZED';
+                   } else {
+                     echo 'Something Went Wrong';
+                   }
+                   exit;
+                 } else {
+
+                   return $result->IdentityTokenApplicationResponse->idToken;
+
+                 }
            }
  
            // Encrypting Client Id
@@ -277,8 +254,45 @@
              
               return $result->auth_code;
            }
-          
 
+
+        private function setUserDetails($usr , $userDetails) {
+
+            $user = new User();
+            $user->setId($usr->id);
+            $user->setName($usr->name);
+            $user->setEmpid($usr->empId);
+            $user->setEmail($usr->email);
+            if(isset($userDetails)) {
+                $user->setDepartment($userDetails->department);
+                $user->setDesignation($userDetails->designation);
+                $user->setVertical($userDetails->vertical);
+                $user->setManagerName($userDetails->managerName);
+                $user->setManagerId($userDetails->reportingTo);
+
+                $mngDetails = $this->getHRMSDeatails($userDetails->reportingTo);
+                if(isset($mngDetails)) {
+                    $user->setManagerEmail($mngDetails->data->emailId);
+                }
+                $user->setManagerId($userDetails->reportingTo);
+            }
+            return $user;
+        }
+
+       /**
+        * @param string $userId
+        * @return mixed
+        */
+        private function getHRMSDeatails(string $userId) {
+
+            $url = 'https://hrms.quikrcorp.com/app/aboutEmpDetail?q=425';//.$userId;
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER , true);
+            $res= curl_exec($curl);
+            $result = json_decode($res);
+
+            return $result;
+        }
         
    }
 

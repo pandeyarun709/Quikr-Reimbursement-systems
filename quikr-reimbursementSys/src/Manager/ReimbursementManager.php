@@ -47,15 +47,20 @@ class ReimbursementManager extends  CurlApiRequest {
               for ($i = 0; $i < $size; $i++) {
 
                   switch ($raw["expense"][$i]) {
-                      case 'road' :
+                      case 'localTravel' :
                           $task->setRoadFare($raw['amount'][$i]);
-                          $imageData['roadFare'] = $img[$i];
+                          $imageData['localTravel'] = $img[$i];
                           break;
 
                       case 'air' :
                           $task->setAirFare($raw['amount'][$i]);
                           $imageData['airFare']= $img[$i];
                           break;
+
+                      case 'outstationTravel' :
+                           $task->setOutstationTravel($raw['amount'][$i]);
+                           $imageData['outstationTravel'] = $img[$i];
+                           break;
 
                       case 'petrol' :
                           $task->setPetrol($raw['amount'][$i]);
@@ -72,10 +77,15 @@ class ReimbursementManager extends  CurlApiRequest {
                           $imageData['hotelStay']= $img[$i];
                           break;
 
-                      case 'buisness' :
-                          $task->setBusinessMeal($raw['amount'][$i]);
-                          $imageData['businessMeal']= $img[$i];
+                      case 'lunchSnacks' :
+                          $task->setLunchSnacks($raw['lunchSnacks'][$i]);
+                          $imageData['lunchSnacks']= $img[$i];
                           break;
+
+                      case 'teamOuting' :
+                           $task->setTeamOuting($raw['amount'][$i]);
+                           $imageData['teamOuting'] = $img[$i];
+                           break;
 
                       case 'miscellaneous' :
                           $task->setMiscelleneous($raw['amount'][$i]);
@@ -92,20 +102,15 @@ class ReimbursementManager extends  CurlApiRequest {
 
               $req->setEmpId($user["empid"]);
               $req->setEmpName($user["name"]);
-             // $req->setEmail($user["email"]);
-            //  $req->setDesignation($user["designation"]);
-             // $req->setDepartment("Technolgy");//$user["department"]);
-             // $req->setManagerId($user["managerId"]);
               $req->setTotalExp($totalExp);
-            //  $req->setVertical("Goods");//$user["vertical"]);
-              //$req->setManagerName("Arpan");
         return $req->getAllPropertiesFilter();
 
     }
 
-
-
-    private function  getImagesUrl() {
+    /**
+     * @return array
+     */
+    private function  getImagesUrl():array {
         $imgUrls=[];
         $x=0;
         foreach($_FILES['files']['tmp_name'] as $key => $tmp_name){
@@ -113,7 +118,6 @@ class ReimbursementManager extends  CurlApiRequest {
             $file_size=$_FILES['files']['size'][$key];
             $file_name = $_FILES['files']['name'][$key];
             $file_type=$_FILES['files']['type'][$key];
-
             $info = getimagesize($file_tmp);
             $f = fopen($file_tmp, "r");
             $string = base64_encode(fread($f, filesize($file_tmp)));
@@ -123,7 +127,6 @@ class ReimbursementManager extends  CurlApiRequest {
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('imagerawdata' => $imagerawdata)));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $result=json_decode(curl_exec($ch),true);
-
             curl_close($ch);
             unset($ch);
             $imgUrls[$x]=$result['fileurl'];

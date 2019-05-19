@@ -79,29 +79,34 @@ Outer for loop
               <tr>
                <th>Start Date</th>
                <th> End Date</th>
-               <th>Taxi/ Auto/Bus/ Rail Fare</th>
-                <th>Airfare</th>
-                <th>Petrol</th>
-                <th>Telephone Expense</th>
-                <th>Bussiness Meal</th>
-                <th>Hotel Stay</th>
-                <th>Miscellaneous</th>
-                <th>Description</th>
-                <th>Total</th>
+               <th>Airfare</th>
+               <th>Local Travel</th>
+               <th>Petrol</th>
+               <th>Monthly Mobile </th>
+               <th>Lunch Snacks</th>
+               <th>Hotel Stay</th>
+               <th>Local Travel-Outstation</th>
+               <th>Team Outing</th>
+               <th>Miscellaneous</th>
+               <th>Description</th>
+               <th>Total</th>
              </tr>
           </thead>
            <tbody>
              {% for res in data.tasks %}
                <tr>
-                   <td> {{ res.startDate|date("Y/m/d") }} </td>
-                   <td> {{ res.endDate|date("Y/m/d") }} </td>
+                    <td> {{ res.startDate|date("Y/m/d") }} </td>
+                    <td> {{ res.endDate|date("Y/m/d") }} </td>
                     <td> {{ res.airFare }} </td>
-                    <td> {{ res.roadFare }} </td>
-                    <td> {{ res.petrol}} </td>
+                    <td> {{ res.localTravel }} </td>
+                    <td> {{ res.petrol }} </td>
                     <td> {{ res.telephoneExp}}</td>
-                    <td> {{ res.businessMeal }}</td>
+                    <td> {{ res.lunchSnacks }}</td>
                     <td> {{ res.hotelStay }}</td>
+                    <td> {{ res.outstationTravel }}</td>
+                    <td> {{ res.teamOuting }}</td>
                     <td> {{ res.miscelleneous }}</td>
+                    <td> {{ res.description }}</td>
                     <td> {{ res.totalExp }} </td>
                </tr>
            {% endfor %}

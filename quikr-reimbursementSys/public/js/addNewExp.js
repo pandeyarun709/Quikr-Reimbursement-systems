@@ -1,12 +1,14 @@
 console.log("Connected check");
 //  var date = document.querySelectorAll(".expense_date");
 var expenses = {
-    road : 0,
+    localTravel : 0,
     air : 0,
     petrol : 0,
     telephone : 0,
+    outstationTravel : 0,
+    teamOuting : 0,
     hotel : 0,
-    buisness : 0,
+    lunchSnacks : 0,
     miscellaneous : 0
 };
 
@@ -57,7 +59,7 @@ $("table").on("change" , ".expenses" , (e)=>{
      let exp = e.target.value;
 
      if(expenses[exp] !== 0) {
-         alert("You already field this expense type");
+         alert("You already fill this expense type");
          e.target.value = "";
      } else expenses[exp] = 1;
 

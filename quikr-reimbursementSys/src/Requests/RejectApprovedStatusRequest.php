@@ -8,12 +8,27 @@ class RejectApprovedStatusRequest extends BaseRequest {
     /**
      * @var int
      */
-    protected $managerId;
+    protected $updaterId;
 
     /**
      * @var int
      */
-    protected $financeId;
+    protected $updaterName;
+
+    /**
+     * @var int
+     */
+    protected $udpaterEmail;
+
+    /**
+     * @var string
+     */
+    protected $type;
+
+    /**
+     * @var int
+     */
+    protected $empId;
 
     /**
      * @var int
@@ -26,42 +41,89 @@ class RejectApprovedStatusRequest extends BaseRequest {
     protected $status;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $comment;
 
     /**
      * @return int
      */
-    public function getManagerId(): int
+    public function getUpdaterId(): int
     {
-        return $this->managerId;
+        return $this->updaterId;
     }
 
     /**
-     * @param int $managerId
+     * @param int $updaterId
      */
-    public function setManagerId(int $managerId): void
+    public function setUpdaterId(int $updaterId): void
     {
-        $this->managerId = $managerId;
+        $this->updaterId = $updaterId;
     }
 
     /**
      * @return int
      */
-    public function getFinanceId(): int
+    public function getUpdaterName(): int
     {
-        return $this->financeId;
+        return $this->updaterName;
     }
 
     /**
-     * @param int $financeId
+     * @param int $updaterName
      */
-    public function setFinanceId(int $financeId): void
+    public function setUpdaterName(int $updaterName): void
     {
-        $this->financeId = $financeId;
+        $this->updaterName = $updaterName;
     }
 
+    /**
+     * @return int
+     */
+    public function getUdpaterEmail(): int
+    {
+        return $this->udpaterEmail;
+    }
+
+    /**
+     * @param int $udpaterEmail
+     */
+    public function setUdpaterEmail(int $udpaterEmail): void
+    {
+        $this->udpaterEmail = $udpaterEmail;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEmpId(): int
+    {
+        return $this->empId;
+    }
+
+    /**
+     * @param int $empId
+     */
+    public function setEmpId(int $empId): void
+    {
+        $this->empId = $empId;
+    }
 
     /**
      * @return int
@@ -96,22 +158,20 @@ class RejectApprovedStatusRequest extends BaseRequest {
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getComment(): string
+    public function getComment(): ?string
     {
         return $this->comment;
     }
 
     /**
-     * @param string $comment
+     * @param string|null $comment
      */
-    public function setComment(string $comment): void
+    public function setComment(?string $comment): void
     {
         $this->comment = $comment;
     }
-
-
 }
 
 

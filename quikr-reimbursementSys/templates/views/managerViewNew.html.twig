@@ -20,16 +20,14 @@
     {{ include('inc/navbar.html.twig') }}
 </header>
 
-<div class="container">
+<div class="" style="padding: 10px;margin: 10px;">
 
     <div class="jumbotron">
         <div class="page-header">
             <legend><h3>Pending Expense Requests</h3></legend>
-
         </div>
     </div>
     <!--  Start -->
-
     <div style="margin-left : 60%; display:flex" >
 
         <form class="form-inline my-2 my-lg-0" style="padding-bottom : 10px;" action="/manager/filter" method="POST" >
@@ -80,7 +78,7 @@
             {% for k,v in value.forms %}
 
                 <div>
-                    <div >
+{#                    <div >#}
 {#                        {% if v.status == "pending" %}#}
 {#                            <a   name="status" class="btn btn-xs btn-info"#}
 {#                                 href="/manager/approve/{{ k }}"> Approve</a>#}
@@ -91,9 +89,14 @@
 {#                        {% else %}#}
 {#                            <p style="color : green"> <i class="fas fa-check-circle"></i> </p>#}
 {#                        {% endif %}#}
-                    </div>
-
-
+{#                    </div>#}
+                     <form class="form-status form-inline" method="POST" action="/manager/action/{{v.formid}}/{{value.empId}}">
+                         <textarea type="text" name="comment" class="comment form-control disc" cols="100" rows ="3" placeholder="Add Only Rejection Comment" required></textarea>
+                         <div>
+                           <button  class="action-btn btn btn-sm btn-warning" name="reject">Reject</button>
+                           <a class="action-btn btn btn-sm btn-info" name="approve" href="/manager/action/{{v.formid}}/{{value.empId}}">Approve</a>
+                          </div>
+                       </form>
                     <table cellpadding="0" cellspacing="0" border="0" class="table display" id="example" width="100%">
                         <thead>
                         <tr>
@@ -112,11 +115,6 @@
 
                         </tr>
                         </thead>
-                        <form class="form-inline" method="POST" action="/manager/action/{{ v.formid }}">
-                            <input type="text" name="comment" class="comment" placeholder="Add Comment" required>
-                            <button  class="action-btn btn btn-sm btn-warning" name="reject">Reject</button>
-                            <button  class="action-btn btn btn-sm btn-info" name="approve"> approve</button>
-                        </form>
                         <tbody>
                         {% for v1 in v.tasks %}
                             <tr>

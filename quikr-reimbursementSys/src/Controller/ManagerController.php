@@ -75,7 +75,48 @@ $json_data =  '[
                            "imageurl1",
                            "imageurl2"
                        ]
-                   },
+                   }
+               ]
+           }
+       ]
+   },
+    {
+       "empId": 1,
+       "empName": "john",
+       "forms": [
+           {
+               "formid": 48,
+               "publishedDate": "2019-05-08T18:30:00.000+0000",
+               "createdDate": "2019-05-08T18:30:00.000+0000",
+               "status": "approved",
+               "published": true,
+               "tasks": [
+                   {
+                       "airFare": 500.25,
+                       "roadFare": 0,
+                       "petrol": 0,
+                       "telephoneExp": 0,
+                       "hotelStay": 0,
+                       "businessMeal": 0,
+                       "miscellaneous": 0,
+                       "totalExp": 550.25,
+                       "description": null,
+                       "startDate": "2019-04-03T18:30:00.000+0000",
+                       "endDate": "2019-04-03T18:30:00.000+0000",
+                       "imageUrls": [
+                           "imageurl1",
+                           "imageurl2"
+                       ]
+                   }
+               ]
+           },
+            {
+               "formid": 48,
+               "publishedDate": "2019-05-08T18:30:00.000+0000",
+               "createdDate": "2019-05-08T18:30:00.000+0000",
+               "status": "approved",
+               "published": true,
+               "tasks": [
                    {
                        "airFare": 500.25,
                        "roadFare": 0,
@@ -126,10 +167,10 @@ $json_data =  '[
         }
 
         /**
-         * @Route("/manager/action/{formId}" ,name="approved")
+         * @Route("/manager/action/{formId}/{empId}" ,name="approved")
          * @Method({"POST"})
          */
-        public function managerAction($formId ,Request $request)
+        public function managerAction($formId ,$empId , Request $request)
         {
           try {
               // Check Authenticatio
@@ -141,8 +182,7 @@ $json_data =  '[
               
                 $user = $this->session->get('user')->getAllProperties();
                 $manager = new ManagerConManager();
-
-               $data = $manager->prepareActionRequest($user ,$raw,$formId);
+               $data = $manager->managerAction($user ,$raw,$formId ,$empId);
 
                 $url='localhost:8080/Forms/Manager/UpdateForm';
                 $get_req = $this->curlApi->callAPI('PUT',$url,json_encode($data));
