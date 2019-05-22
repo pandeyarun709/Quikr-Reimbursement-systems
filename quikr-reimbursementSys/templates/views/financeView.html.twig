@@ -3,112 +3,161 @@
  {% block title %}Finance{% endblock %}
 
  {% block stylesheets %}
-  <link rel="stylesheet" href="/assets/reimbursement.css" >
+     <link rel="stylesheet" href="/assets/reimbursement.css" >
  {% endblock %}
 
  {% block body %}
 
- 
 
-  <!-- header -->
- <header>
+
+<!-- header -->
+<header>
     <!-- Navbar -->
     {{ include('inc/navbar.html.twig') }}
-</header> 
+</header>
 
 <!-- Section -->
 <section class="container">
 
-<div class="jumbotron">
-  
-   <div style="display : flex">
-    <div class="page-header">
-       <h3>Pending Payments</h3>
-       <hr>
-   </div>
+    <div class="">
 
-   <h4 class="panel-title pull-right" style="margin-left:70%">
-            <a  href="/finance/paidview" class="btn btn-sm btn-info">
-            PAID
-            </a>
-          </h4>
-          </div>
-   <!--  Start -->
-{% if result %}
-    {% for key,value in result %}
+        <div style="display : flex">
+            <div class="page-header">
+                <h3>Pending Payments</h3>
+                <hr>
+            </div>
+
+            <h4 class="panel-title pull-right" style="margin-left:70%">
+                <a  href="/finance/paidview" class="btn btn-sm btn-info">
+                    PAID
+                </a>
+            </h4>
+        </div>
+
+        <div style="margin-left : 50%; display:flex" >
+
+            <form class="form-inline my-2 my-lg-0" style="padding-bottom : 10px;" action="/finance/filter" method="POST" >
+                <select id="culscore" name="vertical" class="form-control" style="margin : 7px;">
+                    <option value="Verticle" selected disabled hidden>Verticle</option>
+                    <option value="Goods">Goods</option>
+                    <option value="Horizontal">Horizontal</option>
+                    <option value="Services">Services</option>
+                    <option value="Jobs">Jobs</option>
+                    <option value="Zefo">Zefo</option>
+                    <option value="Realestate">Real estate</option>
+                </select>
+
+                <select id="culscore" name="financeStatus" class="form-control" style="margin : 7px;">
+                    <option value="" selected disabled hidden>Select</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="pending">Pending</option>
 
 
-    
-        <div class="panel-heading clearfix">
-          
-          
-         
-         
-          <h4 class="panel-title pull-left">
-                     <b>  MANAGER ID {{ key }}</b>
+                </select>
+                <select id="culscore" name="month" class="form-control" style="margin : 7px;">
+                    <option value="" selected disabled>Month</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 </option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
 
-          </h4>
-         
-           {% for k,v in value %}
-           
-       
-           
-            <div class="panel-body">
-            <table cellpadding="0" cellspacing="0"  border="0" class="table display" id="example" width="100%">
-            <thead>
-                  <tr>
-                  <th width="15%"> Name </th>
-                  <th width="15%">Emp Id</th>
-                  <th width="10%">FORM ID</th>
-                    <th width="15%">Total Exp</th>
-                    <th width="15%">Approved Date</th>
-                    <th width="15%">Action</th>
-                    <th>Comments</th>
-                    <th width="15%">Details</th>
-                </tr>
-              </thead>
-              <tbody>
-               {% for k1,v1 in v %}
-                <tr>
-                    <td width="15%"> {{ v1.empname }}</td>
-                    <td width="10%"> {{ k }}</td>
-                    <td width="10%"> {{ v1.formid }}  </td>
-                    <td width="10%"> {{ v1.total_exp }} </td>
-                    <td width="10%"> {{ v1.approved_date|date("Y/m/d") }} </td>
-                    <td width="10%">  
-                        <a id="pay" name="status" class="btn btn-sm btn-warning" href="/finance/payment/{{ v1.formid }}"> Approve</a>
-                    </td>
-                    <td width="25%">
-                      <form method="POST" action="/finance/payment/{{ v1.formid }}">
-                         <textarea type="text" name="disc[]" class="form-control disc" cols="100" rows ="2"  required></textarea>
-                         <input style="width:100%;" type="submit" id="pay" name="status" class="btn btn-sm btn-danger" value="Reject" />
-                      </form>
-                    </td>
-                    <td width="10%"> <a id="view" name="details" href="/finance/view/{{ v1.formid }}" class="btn btn-xs btn-info"> VIEW</a></td>
-                        <!-- Approve or Reject -->
-                </tr>
+                <select id="culscore" name="year" class="form-control" style="margin : 7px;">
+                    <option value="" selected disabled>Year</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                </select>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!--  Start -->
+        {% if result %}
+            {% for data1 in result %}
+
+                <div class="panel-heading clearfix" style="border:2px solid black; margin-bottom:15px; padding:8px; ">
+                    <h4 class="panel-title pull-left">
+
+                        <b>  MANAGER ID {{ data1.managerId }}</b>
+
+                    </h4>
+
+                    {% for k,v in data1.data %}
+
+
+                        <div class="panel-body">
+                            <b>Emp Id :</b><span>{{v.empId}}</span><br>
+                            <b>Emp Name :</b><span>{{v.empName}}</span><br>
+                            <b>Verticle :</b><span>{{v.vertical}}</span><br>
+                            <b>Department :</b><span>{{v.department}}</span><br>
+                            <b>Designation :</b><span>{{v.designation}}</span><br>
+                            </form>
+                            <table cellpadding="0" cellspacing="0"  border="0" class="table display" id="example" width="100%">
+                                <thead>
+                                <tr>
+                                    <th width="10%">FORM ID</th>
+                                    <th width="15%">Approved Date</th>
+                                    <th width="15%">Total Exp</th>
+                                    <th width="15%">Action</th>
+                                    <th>Comments</th>
+                                    <th width="15%">Details</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for k1,v1 in v.formDetails %}
+                                    <tr>
+                                        <td width="10%"> {{ v1.formid }}  </td>
+                                        <td width="10%"> {{ v1.managerApprovedDate|date("Y/m/d") }} </td>
+                                        <td width="10%"> {{ v1.totalExp }} </td>
+
+                                        <td width="10%">
+                                            <a id="action" name="approved" class="btn btn-sm btn-warning" href="/finance/action/{{v1.formid}}/{{v.empId}}"> Approve</a>
+                                        </td>
+                                        <td width="25%">
+                                            <form method="POST" action="/finance/action/{{v1.formid}}/{{v.empId}}">
+                                                <textarea type="text" name="comment" class="form-control disc" cols="100" rows ="2"  required></textarea>
+                                                <input style="width:100%;" type="submit" id="reject" name="reject" class="btn btn-sm btn-danger" value="Reject" />
+                                            </form>
+                                        </td>
+                                        <td width="10%"> <a id="view" name="details" href="/finance/view/{{ v1.formid }}" class="btn btn-xs btn-info"> VIEW</a></td>
+                                        <!-- Approve or Reject -->
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+
+                <!--- End -->
+
             {% endfor %}
-           {% endfor %}
-        </tbody>
-        </table>
-        </div>
-        </div>
-      
-    <!--- End -->
-
-    {% endfor %}
- {% endif %}   
-{% endblock %}
+        {% endif %}
+        {% endblock %}
 
 
 
-{% block javascripts %}
-  <footer class="page-footer font-small blue pt-4 mt-4">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" charset="utf-8">
-  $(function () {
-    $('[data-toggle="popover"]').popover()
-  })
-  </script>
-  </footer>
+        {% block javascripts %}
+            <footer class="page-footer font-small blue pt-4 mt-4">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script type="text/javascript" charset="utf-8">
+                    $(function () {
+                        $('[data-toggle="popover"]').popover()
+                    })
+                </script>
+            </footer>
 {% endblock %}

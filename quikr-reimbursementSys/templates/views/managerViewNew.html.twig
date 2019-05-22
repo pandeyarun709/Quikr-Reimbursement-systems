@@ -37,8 +37,6 @@
                 <option value="approved">Approved</option>
                 <option value="rejected">Rejected</option>
                 <option value="pending">Pending</option>
-
-
             </select>
             <select id="culscore" name="month" class="form-control" style="margin : 7px;">
                 <option value="" selected disabled>Month</option>
@@ -55,7 +53,6 @@
                 <option value="11">11</option>
                 <option value="12">12</option>
             </select>
-
             <select id="culscore" name="year" class="form-control" style="margin : 7px;">
                 <option value="" selected disabled>Year</option>
                 <option value="2015">2015</option>
@@ -70,9 +67,9 @@
 
 
 {# -----------------------  Employee Date --------------------------- #}
-    {% for key, value in x %}
+    {% for key, value in result %}
         <div style="border: 2px solid black ; margin-top: 10px; padding: 5px;">
-            <h4 style="margin: 5px;"> EmpId  {{ value.empId }} </h4>
+            <h4 style="margin: 5px;">{{ value.empName }} <small>(EmpId:{{ value.empId }})</small> </h4>
 
             <!-- Form id loop -->
             {% for k,v in value.forms %}
@@ -90,43 +87,47 @@
 {#                            <p style="color : green"> <i class="fas fa-check-circle"></i> </p>#}
 {#                        {% endif %}#}
 {#                    </div>#}
-                     <form class="form-status form-inline" method="POST" action="/manager/action/{{v.formid}}/{{value.empId}}">
+                     <form class="form-status form-inline" method="POST" action="/manager/action/{{v.formId}}/{{value.empId}}">
                          <textarea type="text" name="comment" class="comment form-control disc" cols="100" rows ="3" placeholder="Add Only Rejection Comment" required></textarea>
                          <div>
                            <button  class="action-btn btn btn-sm btn-warning" name="reject">Reject</button>
-                           <a class="action-btn btn btn-sm btn-info" name="approve" href="/manager/action/{{v.formid}}/{{value.empId}}">Approve</a>
+                           <a class="action-btn btn btn-sm btn-info" name="approve" href="/manager/action/{{v.formId}}/{{value.empId}}">Approve</a>
                           </div>
                        </form>
                     <table cellpadding="0" cellspacing="0" border="0" class="table display" id="example" width="100%">
                         <thead>
                         <tr>
                             <th>Form Id</th>
-                            <th >Start Date</th>
-                            <th >End Date</th>
-                            <th>Taxi/ Auto/Bus/ Rail Fare</th>
+                            <th>Start Date</th>
+                            <th> End Date</th>
                             <th>Airfare</th>
+                            <th>Local Travel</th>
                             <th>Petrol</th>
-                            <th>Telephone</th>
+                            <th>Monthly Mobile </th>
+                            <th>Lunch Snacks</th>
                             <th>Hotel Stay</th>
-                            <th>Buisness Meal</th>
+                            <th>Local Travel-Outstation</th>
+                            <th>Team Outing</th>
                             <th>Miscellaneous</th>
-                            <th>Buisness Justification</th>
-                            <th>Document Proofs</th>
-
+                            <th>Description</th>
+                            <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for v1 in v.tasks %}
                             <tr>
-                                <td width="5%">{{ v.formid }}</td>
+                                <td width="5%">{{ v.formattedFormId }}</td>
                                 <td width="9%"> {{v1.startDate|date("Y/m/d") }}</td>
                                 <td width="9%"> {{v1.endDate|date("Y/m/d") }}</td>
-                                <td width="9%"> {{v1.roadFare}}</td>
-                                <td width="9%"> {{ v1.airFare}} </td>
+                                <td width="9%"> {{v1.airFare}}</td>
+                                <td width="9%"> {{ v1.localTravel}} </td>
                                 <td width="9%"> {{v1.petrol}} </td>
                                 <td width="9%"> {{ v1.telephoneExp }} </td>
-                                <td width="9%"> {{ v1.businessMeal}} </td>
+                                <td width="9%"> {{ v1.lunchSnacks}} </td>
                                 <td width="9%"> {{ v1.hotelStay }}</td>
+                                <td width="9%"> {{ v1.outstationTravel }}</td>
+                                <td width="9%"> {{ v1.teamOuting }}</td>
+                                <td width="9%"> {{ v1.miscellaneous }}</td>
                                 <td width="9%"> {{ v1.description }}</td>
                                 <td width="9%"> {{ v1.totalExp}}</td>
                                 <td width="5%">

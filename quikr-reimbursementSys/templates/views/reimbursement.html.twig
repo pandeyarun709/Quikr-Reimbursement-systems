@@ -36,7 +36,7 @@
 
 
 
-<div class="container" >
+<div style="padding: 1%;" >
 
  <div class="jumbotron">
     <div class="page-header">
@@ -58,21 +58,19 @@ Outer for loop
 
 ================== -->
 {% if result %}
-{% set i = 0 %}
 {% for data in result %}
     <div style="border: 2px solid black ; margin-top: 10px; padding: 5px;">
       <div style="display:flex">
-          <h4> Form ID {{data.empId}}</h4>
-{#          <div>#}
-{#            {% if status[key[i]] == "pending" %}#}
-{#                <p style="color: #15151c;"> <i class="fas fa-clock"></i></p>#}
-{#            {% elseif status[key[i]] == "rejected" %}#}
-{#                  <p style="color: red;"> <i class="fas fa-times-circle"></i></p>#}
-
-{#            {% else %}#}
-{#                <p style="color : green"> <i class="fas fa-check-circle"></i> </p>      #}
-{#            {% endif %}#}
-{#          </div>#}
+          <h4> Form ID {{data.formattedFormId}}</h4>
+          <div>
+            {% if data.managerStatus == "pending" %}
+                <p style="color: #15151c;"> <i class="fas fa-clock"></i></p>
+            {% elseif data.managerStatus  == "rejected" %}
+                  <p style="color: red;"> <i class="fas fa-times-circle"></i></p>
+            {% else %}
+                <p style="color : green"> <i class="fas fa-check-circle"></i> </p>
+            {% endif %}
+          </div>
         </div>
         <table cellpadding="0" cellspacing="0" border="0" class="table display" id="example" width="100%">
           <thead>
@@ -93,19 +91,19 @@ Outer for loop
              </tr>
           </thead>
            <tbody>
-             {% for res in data.tasks %}
+             {% for key,res in data.tasks %}
                <tr>
                     <td> {{ res.startDate|date("Y/m/d") }} </td>
                     <td> {{ res.endDate|date("Y/m/d") }} </td>
-                    <td> {{ res.airFare }} </td>
-                    <td> {{ res.localTravel }} </td>
-                    <td> {{ res.petrol }} </td>
-                    <td> {{ res.telephoneExp}}</td>
-                    <td> {{ res.lunchSnacks }}</td>
-                    <td> {{ res.hotelStay }}</td>
-                    <td> {{ res.outstationTravel }}</td>
-                    <td> {{ res.teamOuting }}</td>
-                    <td> {{ res.miscelleneous }}</td>
+                    <td> {{ res.airFare }}          <br> {% if res.imageUrls["airFare"] is defined %}<a target="_blank" href="{{ res.imageUrls["airFare"] }}"> document</a> {% endif %} </td>
+                    <td> {{ res.localTravel }}      <br> {% if res.imageUrls["localTravel"] is defined %}<a target="_blank" href={{ res.imageUrls["localTravel"] }}> document</a> {% endif %} </td>
+                    <td> {{ res.petrol }}           <br> {% if res.imageUrls["petrol"] is defined %}<a  target="_blank" href="{{ res.imageUrls["petrol"] }}">document</a> {% endif %}</td>
+                    <td> {{ res.telephoneExp}}      <br> {% if res.imageUrls["telephoneExp"] is defined %}<a  target="_blank" href="{{ res.imageUrls["telephoneExp"] }}">doc</a> {% endif %}</td>
+                    <td> {{ res.lunchSnacks }}      <br> {% if res.imageUrls["lunchSnacks"] is defined %}<a href="{{ res.imageUrls["lunchSnacks"] }}">document</a> {% endif %}</td>
+                    <td> {{ res.hotelStay }}        <br> {% if res.imageUrls["hotelStay"] is defined %}<a  target="_blank" href="{{ res.imageUrls["hotelStay"] }}">document</a> {% endif %}</td>
+                    <td> {{ res.outstationTravel }} <br> {% if res.imageUrls["outstationTravel"] is defined %}<a  target="_blank" href="{{ res.imageUrls["outstationTravel"] }}">document</a> {% endif %}</td>
+                    <td> {{ res.teamOuting }}       <br> {% if res.imageUrls["teamOuting"] is defined %}<a target="_blank" href="{{ res.imageUrls["teamOuting"] }}">image</a> {% endif %}</td>
+                    <td> {{ res.miscellaneous }}    <br> {% if res.imageUrls["miscellaneous"] is defined %}<a target="_blank" href="{{ res.imageUrls["miscellaneous"] }}">document</a> {% endif %}</td>
                     <td> {{ res.description }}</td>
                     <td> {{ res.totalExp }} </td>
                </tr>
@@ -114,10 +112,6 @@ Outer for loop
       </table>
     </div>
 {%  endfor %}
-    {# </div>
-  </div>
-
- </div>  #}
 <!--- End -->
 {% else %}
 <h3>NO DATA</h3>

@@ -21,149 +21,20 @@
           try {  
           // Check Authenticatio
               if( !$this->checkAuth()) {
-                return $this->redirectToRoute('new_log');
+                  return $this->redirectToRoute('new_log');
               }
-                
-                    // $eid = $this->session->get('empid');
-                    // $get_data =   $this->curlApi->callAPI('GET', 'localhost:8080/login/'.$eid , false);
-                    // $emp = json_decode($get_data, true); 
-        
-              
-                      $user = $this->session->get('user')->getAllProperties();
-                      //var_dump($user); die;
-                  $data = array(
-                      "managerid" => $user['empid'],
-                      "tofetch" => "pending",
-                      "month" => 0,
-                      "year" => 0
-    
-                  );
-               
-                $urlString = 'localhost:8080/Forms/Manager';
-                $get_data = $this->curlApi->callAPI('GET', $urlString , json_encode($data));
-                $response = json_decode($get_data, true);
-
-                //==========================================================================================
-
-
-
-$json_data =  '[
-   {
-       "empId": 1,
-       "empName": "john",
-       "forms": [
-           {
-               "formid": 48,
-               "publishedDate": "2019-05-08T18:30:00.000+0000",
-               "createdDate": "2019-05-08T18:30:00.000+0000",
-               "status": "approved",
-               "published": true,
-               "tasks": [
-                   {
-                       "airFare": 500.25,
-                       "roadFare": 0,
-                       "petrol": 0,
-                       "telephoneExp": 0,
-                       "hotelStay": 0,
-                       "businessMeal": 0,
-                       "miscellaneous": 0,
-                       "totalExp": 550.25,
-                       "description": null,
-                       "startDate": "2019-04-03T18:30:00.000+0000",
-                       "endDate": "2019-04-03T18:30:00.000+0000",
-                       "imageUrls": [
-                           "imageurl1",
-                           "imageurl2"
-                       ]
-                   }
-               ]
-           }
-       ]
-   },
-    {
-       "empId": 1,
-       "empName": "john",
-       "forms": [
-           {
-               "formid": 48,
-               "publishedDate": "2019-05-08T18:30:00.000+0000",
-               "createdDate": "2019-05-08T18:30:00.000+0000",
-               "status": "approved",
-               "published": true,
-               "tasks": [
-                   {
-                       "airFare": 500.25,
-                       "roadFare": 0,
-                       "petrol": 0,
-                       "telephoneExp": 0,
-                       "hotelStay": 0,
-                       "businessMeal": 0,
-                       "miscellaneous": 0,
-                       "totalExp": 550.25,
-                       "description": null,
-                       "startDate": "2019-04-03T18:30:00.000+0000",
-                       "endDate": "2019-04-03T18:30:00.000+0000",
-                       "imageUrls": [
-                           "imageurl1",
-                           "imageurl2"
-                       ]
-                   }
-               ]
-           },
-            {
-               "formid": 48,
-               "publishedDate": "2019-05-08T18:30:00.000+0000",
-               "createdDate": "2019-05-08T18:30:00.000+0000",
-               "status": "approved",
-               "published": true,
-               "tasks": [
-                   {
-                       "airFare": 500.25,
-                       "roadFare": 0,
-                       "petrol": 0,
-                       "telephoneExp": 0,
-                       "hotelStay": 0,
-                       "businessMeal": 0,
-                       "miscellaneous": 0,
-                       "totalExp": 550.25,
-                       "description": null,
-                       "startDate": "2019-04-03T18:30:00.000+0000",
-                       "endDate": "2019-04-03T18:30:00.000+0000",
-                       "imageUrls": [
-                           "imageurl1",
-                           "imageurl2"
-                       ]
-                   }
-               ]
-           }
-       ]
-   }
-]';
-
- //var_dump(json_decode($json_data)); die;
-
-//================================================================================================================================
-
-
-
-
-
-
-
-             
-                
+              $user = $this->session->get('user')->getAllProperties();
+              $manger = new ManagerConManager();
+              $response= $manger->getManagerView($user);
               return $this->render("/views/managerViewNew.html.twig",array(
-                //"result" => $response,
                  "result" => $response,
                  "emp"   => $user,
-                  "x"  => json_decode($json_data)
               ));
            } catch(\Exception $e) {
-              echo "<h2>Sorry for the inconvenience!!(Manager view)</h2>";
-              echo $e;
+              echo "<h2>Sorry for the inconvenience!!</h2>";
+              echo " managerView ".$e->getMessage();
               return new Response();
            }
-              
         }
 
         /**
@@ -177,28 +48,22 @@ $json_data =  '[
               if( !$this->checkAuth()) {
                 return $this->redirectToRoute('new_log');
               }
-
                $raw = $request->request->all();
-              
-                $user = $this->session->get('user')->getAllProperties();
-                $manager = new ManagerConManager();
-               $data = $manager->managerAction($user ,$raw,$formId ,$empId);
-
-                $url='localhost:8080/Forms/Manager/UpdateForm';
-                $get_req = $this->curlApi->callAPI('PUT',$url,json_encode($data));
-                
+               $user = $this->session->get('user')->getAllProperties();
+               $manager = new ManagerConManager();
+                $manager->managerAction($user ,$raw,$formId ,$empId);
                 return $this->redirectToRoute('manager_view');
            } catch(\Exception $e) {
             echo "<h2>Sorry for the inconvenience!!(Manager view)</h2>";
-            echo $e;
+            echo "managerAction ".$e->getMessage();
             return new Response();
          }
       }
 
-        /**
-         * @Route("/manager/{tid}/reject" ,name="reject")
-         * @Method({"GET"})
-         */
+//        /**
+//         * @Route("/manager/{tid}/reject" ,name="reject")
+//         * @Method({"GET"})
+//         */
 //        public function rejected($tid)
 //        {
 //
@@ -235,27 +100,19 @@ $json_data =  '[
 
           try {
                   // Check Authenticatio
-                  if( !$this->checkAuth()) {
+                if( !$this->checkAuth()) {
                     return $this->redirectToRoute('new_log');
-                  }
-
-              
-                  $user = $this->session->get('user')->getAllProperties();
-
-
-                  $d = array_merge(array( "managerid" => $user['empid']) , $request->request->all());
-                  
-                  $url = 'localhost:8080/Forms/Manager';
-                  $get = $this->curlApi->callAPI('GET' , $url , json_encode($d));
-                  $response = json_decode($get , true);
-
-                    return $this->render("/views/managerViewNew.html.twig",array(
+                 }
+                $user = $this->session->get('user')->getAllProperties();
+                $manger = new ManagerConManager();
+                $response= $manger->getManagerView($user , $request->request->all());
+                return $this->render("/views/managerViewNew.html.twig",array(
                     "result" => $response,
                     "emp"   => $user
                   ));
             } catch(\Exception $e) {
-              echo "<h2>Sorry for the inconvenience!!(Manager view)</h2>";
-              echo $e;
+              echo "<h2>Sorry for the inconvenience!!</h2>";
+              echo "managerFilter ".$e->getMessage();
               return new Response();
            }
 

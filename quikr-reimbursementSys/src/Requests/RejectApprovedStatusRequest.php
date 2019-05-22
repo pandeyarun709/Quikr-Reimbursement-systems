@@ -11,12 +11,12 @@ class RejectApprovedStatusRequest extends BaseRequest {
     protected $updaterId;
 
     /**
-     * @var int
+     * @var string
      */
     protected $updaterName;
 
     /**
-     * @var int
+     * @var string
      */
     protected $udpaterEmail;
 
@@ -62,33 +62,33 @@ class RejectApprovedStatusRequest extends BaseRequest {
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUpdaterName(): int
+    public function getUpdaterName(): string
     {
         return $this->updaterName;
     }
 
     /**
-     * @param int $updaterName
+     * @param string $updaterName
      */
-    public function setUpdaterName(int $updaterName): void
+    public function setUpdaterName(string $updaterName): void
     {
         $this->updaterName = $updaterName;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getUdpaterEmail(): int
+    public function getUdpaterEmail(): string
     {
         return $this->udpaterEmail;
     }
 
     /**
-     * @param int $udpaterEmail
+     * @param string $udpaterEmail
      */
-    public function setUdpaterEmail(int $udpaterEmail): void
+    public function setUdpaterEmail(string $udpaterEmail): void
     {
         $this->udpaterEmail = $udpaterEmail;
     }

@@ -85,7 +85,7 @@ class AddExpenseRequest extends  BaseRequest {
      */
     public function setTasks(array $tasks): void
     {
-        $this->tasks = $tasks;
+        $this->tasks[] = $tasks;
     }
 
 

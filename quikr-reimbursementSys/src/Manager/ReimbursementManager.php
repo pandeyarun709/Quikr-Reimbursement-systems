@@ -4,6 +4,7 @@ namespace App\Manager;
 
 
 use App\Requests\AddExpenseRequest;
+use App\Requests\FormRequest;
 use App\Requests\Tasks;
 
 
@@ -14,18 +15,40 @@ class ReimbursementManager extends  CurlApiRequest {
      * @return array
      */
     public  function prepareAddExpenseRequest($raw , $user) {
-        $req = array();
+        $res = array();
         try {
             $postParam = self::setRequest($raw , $user);
-            echo  json_encode($postParam); die;
-            $response = self::callAPI("POST" ,"http://192.168.0.100:8080/Forms/AddForm",json_encode($postParam));
+           echo  json_encode($postParam); die;
+            $res= self::callAPI("GET" ,"http://192.168.89.154:8080/Forms/AddForm",json_encode($postParam));
         } catch(\Exception $e) {
            echo "<h2> ERROR!! -- (Reim manger)</h2>".$e->getMessage();
         }
-        return $req;
+        return $res;
 
     }
 
+    /**
+     * @param $user
+     * @param $toFetch
+     * @return mixed|null
+     */
+    public function getForms($user , $toFetch) {
+        $response = null;
+        try {
+            $postParam = new FormRequest();
+            $postParam->setId(561); //$user["empid"]);
+            $postParam->setToFetch($toFetch);
+            $getData = $this->callAPI("GET" , "http://192.168.89.154:8080/Forms" , json_encode($postParam->getAllPropertiesFilter()));
+            if(!empty($getData)) {
+                $response = json_decode($getData , true);
+            }
+        } catch (\Exception $e) {
+           echo "<h1>ERROR !!</h1>";
+           echo "getForms ".$e->getMessage();
+
+        }
+        return $response;
+    }
 
     /**
      * @param $raw
@@ -48,7 +71,7 @@ class ReimbursementManager extends  CurlApiRequest {
 
                   switch ($raw["expense"][$i]) {
                       case 'localTravel' :
-                          $task->setRoadFare($raw['amount'][$i]);
+                          $task->setLocalTravel($raw['amount'][$i]);
                           $imageData['localTravel'] = $img[$i];
                           break;
 
@@ -92,16 +115,14 @@ class ReimbursementManager extends  CurlApiRequest {
                           $imageData['miscelleneous']=  $img[$i];
                           break;
                   }
-
                   $totalExp = $totalExp + $raw["amount"][$i];
-
               }
               $task->setImageUrls($imageData);
               $task->setTotalExp($totalExp);
               $req->setTasks($task->getAllProperties());
 
-              $req->setEmpId($user["empid"]);
-              $req->setEmpName($user["name"]);
+              $req->setEmpId(561);//$user["empid"]);
+              $req->setEmpName("Preet Mohinder");//$user["name"]);
               $req->setTotalExp($totalExp);
         return $req->getAllPropertiesFilter();
 

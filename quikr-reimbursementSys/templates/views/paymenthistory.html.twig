@@ -3,174 +3,214 @@
  {% block title %}HISTORY{% endblock %}
 
  {% block stylesheets %}
-  <link rel="stylesheet" href="/assets/reimbursement.css" >
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-   integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" 
-   crossorigin="anonymous">
+     <link rel="stylesheet" href="/assets/reimbursement.css" >
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+           crossorigin="anonymous">
+     <style>
+         table {
+             border-collapse: collapse;
+             border-spacing: 0;
+             width: 100%;
+             border: 1px solid #ddd;
+         }
+
+         th, td {
+             text-align: left;
+             padding: 8px;
+         }
+         tr:nth-child(even){background-color: #f2f2f2}
+
+     </style>
  {% endblock %}
 
  {% block body %}
 
- 
-
- <header>
-    {{ include('inc/navbar.html.twig') }}
-</header> 
+<header>
+ {{ include('inc/navbar.html.twig') }}
+</header>
 
 <section class="">
 
-<div class="" >
-<div style="display:flex">
-      <a style="color: black; font-size: em; margin-bottom:50px"  href="/finance"><i class="fas fa-arrow-left"></i></a><br><br>
-      
-      <span style="color: black; font-size: em; margin-left:90%"   onclick="exportTableToExcel('example', 'records')" ><i class="fa fa-download" ></i></span><br><br>
+    <div class="" style="padding : 20px">
+        <div style="display:flex">
+            <a style="color: black; font-size: em; margin-bottom:50px"  href="/finance"><i class="fas fa-arrow-left"></i></a><br><br>
 
-</div>
-    <div class="page-header">
-       <h3>PAYMENT HISTORY</h3>
+            <span style="color: black; font-size: em; margin-left:90%"   onclick="exportTableToExcel('example', 'records')" ><i class="fa fa-download" ></i></span><br><br>
 
-   </div>
+        </div>
+        <div class="page-header">
+            <h3>APPROVED DETAILS</h3>
 
-<div style="margin-left : 60%; display:flex">
+        </div>
 
-   <form class="form-inline my-2 my-lg-0" style="padding-bottom : 10px;" action="/finance/filter" method="POST" >
-            
-              <select id="culscore" name="smonth" class="form-control" style="margin : 7px;">
-                <option value="" selected disabled>Start Month</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5 </option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-              </select>
-               </select>
-              <select id="culscore" name="emonth" class="form-control" style="margin : 7px;">
-                <option value="" selected disabled>End Month</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5 </option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-              </select>
-              <select id="culscore" name="year" class="form-control" style="margin : 7px;">
-                <option value="" selected disabled>Year</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-              </select>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
-   </form>
-</div>
-   
-{% if result %}
-   {% set i=0 %}
+        <div style="margin-left : 50%; display:flex">
 
+            <form class="form-inline my-2 my-lg-0" style="padding-bottom : 10px;" action="/finance/filter" method="POST" >
 
-    <div class="panel-group" id="accordion">
-        
-          
-          <div class="panel-body">
-            <table cellpadding="0" cellspacing="0" border="0" class="table display" id="example" width="100%">
-              <thead>
-                  <tr>
-                 <th width="10%">Start Date</th>
-                  <th width="10%">End Date</th>
-                  <th>Manager ID</th>
-                  <th>Emp Id</th>
-                  <th>Emp Name</th>
-                  <th>Emp email</th>
-                  <th>Vertical</th>
-                  <th>Department</th>
-                  <th> Designation</th>
-                  <th>Form ID</th>
-                  <th>Taxi/ Auto/Bus/ Rail Fare</th>
-                  <th>Airfare</th>
-                  <th>Petrol</th>
-                  <th>Telephone</th>
-                  <th>Hotel Stay</th>
-                  <th>Buisness Meal</th>
-                  <th>Miscellaneous</th>
-                  <th>Total</th>
-                  <th>Approved Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                     {% for d in result %}
-                    <tr>
-                    <td> {{ result[i].financeid }}  </td>
-                        <td> {{ result[i].managerid }}  </td>
-                        <td> {{ result[i].empid }} </td>
+                <select id="culscore" name="toFetchVerticle" class="form-control" style="margin : 7px;">
+                    <option value="" selected disabled hidden>Verticle</option>
+                    <option value="Goods">Goods</option>
+                    <option value="Horizontal">Horizontal</option>
+                    <option value="Services">Services</option>
+                    <option value="Jobs">Jobs</option>
+                    <option value="Zefo">Zefo</option>
+                    <option value="Realestate">Real estate</option>
+                </select>
 
-                        <td> {{ result[i].formid }} </td>
-                        <td> {{ result[i].total_exp }} </td>
-                      <td> {{ result[i].payment_date | date("Y/m/d") }} </td>
-                      </tr>
-                      {% set i=i+1 %}
-                          {% endfor %}
+                <select id="culscore" name="smonth" class="form-control" style="margin : 7px;">
+                    <option value="" selected disabled>Start Month</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 </option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                </select>
+                <select id="culscore" name="emonth" class="form-control" style="margin : 7px;">
+                    <option value="" selected disabled>End Month</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 </option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                <select id="culscore" name="year" class="form-control" style="margin : 7px;">
+                    <option value="" selected disabled>Year</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                </select>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+            </form>
+        </div>
 
-          </tbody>
-          </table>
-          </div>
-          </div>
-
- {% endif %} 
- {% endblock %}
-
-  {% block javascripts %}
-        
-  <script>
-
-    function exportTableToExcel(tableID, filename = ''){
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    
-    filename = filename?filename+'.xls':'excel_data.xls';
-    
-    downloadLink = document.createElement("a");
-    
-    document.body.appendChild(downloadLink);
-    
-    if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['\ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-    
-        downloadLink.download = filename;
-          downloadLink.click();
-    }
-}
-        </script>
-        
-        
+        {% if result %}
 
 
+            <div class="panel-group" id="accordion">
+
+
+                <div class="panel-body" style="overflow-x:auto;">
+                    <table cellpadding="0" cellspacing="0" border="0" class="table display" id="example" width="100%">
+                        <thead>
+                        <tr>
+                            <th width="10%">Form Id</th>
+                            <th width="10%">Emp Id</th>
+                            <th width="10%">Emp Name</th>
+                            <th width="10%">Vertical</th>
+                            <th width="10%">Department</th>
+                            <th width="10%">Designation</th>
+                            <th width="10%">Manager Id</th>
+                            <th width="10%">Manager Name</th>
+                            <th width="10%">Published Date</th>
+                            <th width="10%">Manager Approved Date</th>
+                            <th width="10%">Vertical Head Approved Date</th>
+                            <th width="10%">Finance Approved Date</th>
+                            <th width="10%">Finance Id</th>
+                            <th width="10%">Start Date</th>
+                            <th width="10%">End Date</th>
+                            <th width="10%">AirFare</th>
+                            <th width="10%">Lunch Snacks</th>
+                            <th width="10%">Local Travel</th>
+                            <th width="10%">Outstation Travel</th>
+                            <th width="10%">Petrol</th>
+                            <th width="10%">Telephone Exp</th>
+                            <th width="10%">Team Outing</th>
+                            <th width="10%">Hotel Stay</th>
+                            <th width="10%">Total Exp</th>
+                            <th width="10%">Description</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in result %}
+                            <tr>
+                                <td>{{data.formattedFormId}}  </td>
+                                <td> {{data.empId}}  </td>
+                                <td> {{data.empName}}  </td>
+                                <td> {{data.vertical}}  </td>
+                                <td> {{data.department}}  </td>
+                                <td> {{data.designation}}  </td>
+                                <td> {{data.managerId}}  </td>
+                                <td> {{data.managerName}}  </td>
+                                <td> {{data.publishedDate|date("Y/m/d")}} </td>
+                                <td> {{data.managerApprovedDate|date("Y/m/d") }}  </td>
+                                <td> {{data.verticalHeadApprovedDate|date("Y/m/d") }}  </td>
+                                <td> {{data.financeApprovedDate|date("Y/m/d") }}  </td>
+                                <td> {{data.financeId}}  </td>
+                                <td> {{data.startDate|date("Y/m/d")}}  </td>
+                                <td> {{data.endDate|date("Y/m/d") }}  </td>
+                                <td> {{data.airFare}} </td>
+                                <td> {{data.lunchSnacks}} </td>
+                                <td> {{data.localTravel}} </td>
+                                <td> {{data.outstationTravel}} </td>
+                                <td> {{data.petrol}} </td>
+                                <td> {{data.telephoneExp}} </td>
+                                <td> {{data.teamOuting}} </td>
+                                <td> {{data.hotelStay}} </td>
+                                <td> {{data.totalExp}} </td>
+                                <td> {{data.description}} </td>
+
+
+
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        {% endif %}
+        {% endblock %}
+
+        {% block javascripts %}
+
+            <script>
+
+                function exportTableToExcel(tableID, filename = ''){
+                    var downloadLink;
+                    var dataType = 'application/vnd.ms-excel';
+                    var tableSelect = document.getElementById(tableID);
+                    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+                    filename = filename?filename+'.xls':'excel_data.xls';
+
+                    downloadLink = document.createElement("a");
+
+                    document.body.appendChild(downloadLink);
+
+                    if(navigator.msSaveOrOpenBlob){
+                        var blob = new Blob(['\ufeff', tableHTML], {
+                            type: dataType
+                        });
+                        navigator.msSaveOrOpenBlob( blob, filename);
+                    }else{
+                        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                        downloadLink.download = filename;
+                        downloadLink.click();
+                    }
+                }
+            </script>
 
 
 {% endblock %}
-
-
-
-
-
-
